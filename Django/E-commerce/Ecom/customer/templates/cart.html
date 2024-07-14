@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Cart</title>
+</head>
+<body class="bg-[rgb(238,235,235)]">
+    <div class="cartBodyborder-[2px] h-100px md:flex sm:grid bg-[rgb(238,235,235)] m-5 gap-5">
+    <!-- <div class="cartBodyborder-[2px] h-100px grid grid-cols-2 bg-[rgb(238,235,235)] m-5 gap-5"> -->
+        <div class=" md:w-[50%] sm:w-[100">
+            <div class="cart_items grid gap-3 ">
+                <div class="cart_nav bg-white text-[25px] font-medium p-[3px] items-center justify-center">
+                    <a href="{% url 'homepage:HomePage'%}" class="back flex gap-3 overflow-hidden items-center ">
+                        <span class="material-symbols-outlined">
+                            keyboard_backspace
+                        </span>
+                        <span class="grid grid-rows-1">
+                            Continue Shopping
+                        </span>
+                    </a>
+                </div>
+                <div class="cart_items_list bg-white p-4 grid gap-4">
+                    <div class="cart_text font-medium text-[20px] text-gray-500">
+                        <div class="">Shopping Cart</div>
+                        <div class="">You have total 0 items</div>
+                    </div>
+                    <!-- this for indevisual items and it have iterat -->
+                    <div class="bg-slate-000 ">
+
+
+                        {% for item in cartItems.values %}
+                        <div class="details cart_items_details  gap-4 items-center grid grid-cols-2 " >
+                            <div class="text text_img h-[250px] w-auto overflow-hidden flex items-center justify-center">
+                                <img src="{{ item.ProductImg }}" alt="" class="item_img" s1tyle="grid-area: a;">
+                            </div>
+                            <div class="text text_det grid font-medium h-[70%] gap-5 text-[17px]">
+                                <a class="item_name flex flex-wrap"> {{ item.Name }} </a>
+                                <a class="item_price">{{ item.price }}</a>
+                                <a class="delete_item">
+                                    <span class="material-symbols-outlined">
+                                        shopping_cart_checkout
+                                    </span>
+                                    <span class="material-symbols-outlined">
+                                        check
+                                    </span>
+                                </a>
+                                <div class="quentity_ele  flex justify-center items-center">
+                                    <span class="font-medium text-[17px]">Enter Quentity : </span>
+                                    <input type="number" class=" border-black border-[1px] w-16 h-10 mx-3 px-2 rounded-[16px]">
+                                </div>
+                                <div class="quentity_ele flex items-center justify-center">
+                                    <button class="remove bg-[rgb(255,0,0)] px-2 rounded-[16px] h-8">remove1</button>
+                                </div>
+                            </div>
+                            {% endfor %}
+                            <!-- remove and quentity set button -->
+                            
+                        </div>
+                        
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!-- price cart  -->
+        <div class="md:w-[50%] sm:w-[100%]">
+            <div class="cart_price_detiels grid gap-3">
+                <div class="price_deti_ele heding  bg-white text-[25px] font-medium p-[3px] items-center justify-center">PRICE DETAILS</div>
+                <div class="total_price_detils  bg-white p-5 grid grid-cols-1 gap-2 text-[20px]">
+                    <div class="grid grid-cols-[1fr,6px,1fr] gap-3">
+                        <span class="md:text-right font-medium">Price</span>
+                        <span>:</span>
+                        <span>00000</span>
+                    </div>
+                    <div class="grid grid-cols-[1fr,6px,1fr] gap-3">
+                        <span class="md:text-right font-medium">Discount</span>
+                        <span>:</span>
+                        <span>00000</span>  
+                    </div>
+                    <div class="grid grid-cols-[1fr,6px,1fr] gap-3">
+                        <span class="md:text-right font-medium">Packaging Fee</span>
+                        <span>:</span>
+                        <span>00000</span>
+                    </div>
+                    <div class="grid grid-cols-[1fr,6px,1fr] gap-3">
+                        <span class="md:text-right font-medium">Delivery charge</span>
+                        <span>:</span>
+                        <span>00000</span>
+                    </div>
+                    <div class="grid grid-cols-[1fr,6px,1fr] gap-3">
+                        <span class="md:text-right font-medium"> Total Price</span>
+                        <span>:</span>
+                        <span>00000</span>
+                    </div>
+                </div>
+                <div class="price_deti_ele delivery_det grid gap-2">
+                    <div class="price_deti_ele heding  bg-white text-[25px] font-medium p-[3px] items-center justify-center">ADDRESS DETAILS</div>
+                    <!-- .................... option address ...................  -->
+                     <div class=" bg-white text-[240x] grid gap-3 m-2 p-3">
+                         <select name="" id="" class="select_address bg-gray-300 h-[40px] px-3 text-[18px]">
+                             <option value="000" class="opt000"></option>
+                             <option value="1">chatra akhrasal bankura 722206</option>
+                             <option value="0" class="addAddress" >Add New Address</option>
+                         </select>
+                         <div class="add_new_address">
+                            <form action="" method="post" class="addAdressForm" style="display: none; ">
+                                <input type="text" placeholder="  Enter your New Address" style="
+                                    border: 1px solid black;
+                                    border-radius: 25px;
+                                    height: 28px;
+                                    padding: 6px;
+                                    font-size: 18px;
+                                    width: 80%;
+                                    margin-left: 10%;
+                                    margin-right: 10%;
+                                ">
+                                <input type="submit" value="Add" style="
+                                    border: 1px solid black;
+                                    border-radius: 25px;
+                                    height: 28px;
+                                    width: 20%;
+                                    margin-left: 70%;
+                                    margin-top: 3px;
+                                    margin-bottom: 3px;
+                                ">
+                            </form>
+                            
+                         </div>
+                     </div>
+                </div>
+                <div class="price_deti_ele place_order_div flex justify-center bg-[rgb(238,235,235)]  rounded-[20px]">
+                    <button type="submit" class="place_order border-[1px] border-black rounded-[25px] h-[35px] w-[20%] my-3 bg-gray-300">Place order</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        select_address = document.querySelector('.select_address')
+        addAddress = document.querySelector('.addAddress')
+        addAdressForm = document.querySelector('.addAdressForm')
+        
+        // add address function start 
+        select_address.addEventListener('change',()=>{
+            selectedValue = select_address.value
+            console.log("value is : "+selectedValue)
+            document.querySelector('.opt000').style.display = 'none';            // 000 option hide
+            if (selectedValue == '0'){
+                addAdressForm.style.display='grid'
+            }else{
+                addAdressForm.style.display='None'
+            }
+            
+        })
+        // add address function end
+
+
+        // remove from cart function start
+        cart_items_detail = document.querySelectorAll('.cart_items_details')
+        cart_items_detail.forEach(element =>{
+            // console.log("list")
+            removeBtn=element.querySelector('.remove')
+            // console.log(rem)
+            removeBtn.addEventListener('click',()=>{
+                element.style.display='None'
+            });
+        });
+        console.log('working script end')
+        // remove from cart function end
+    </script>
+</body>
+</html>

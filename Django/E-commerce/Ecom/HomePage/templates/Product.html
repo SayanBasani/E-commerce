@@ -1,0 +1,63 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Document</title>
+</head> -->
+{% extends "nav.html"%}
+{% block titel %}Product {%endblock%}
+
+<!-- <body class=""> -->
+{% block content %} 
+    <div class=" border-2 border-black overflow-hidden " >
+        <div class="flex">
+            <div class=" border-2 w-full flex gap-3 place-items-center p-5">
+                <div class="w-[500px] h-[350px] bg-slate-300 flex justify-center items-center overflow-hidden">
+                    <img src="{{l_p_data.ProductImg}}" alt="">
+                </div>
+                <div class="w-full bg-slate-300 h-[250px] flex justify-center flex-col pl-[40px] text-[30px] font-serif">
+                    <div class="">{{l_p_data.Name}} </div>
+                    <div class="">
+                        {{l_p_data.price}} 
+                        <span class="material-symbols-outlined">
+                            currency_rupee
+                            </span>
+                    </div>
+                    <div class="">rating</div>
+                </div>
+            </div>
+        </div>
+        <div class="bg-viole w-[100%-5px] h-auto m-5 mr-5  ">
+            <div class="">
+                <p class="text-[20px] pl-5 pt-2 pb-2 font-serif font-bold">information</p>
+            </div>
+            <div class="border-white border-2 items-center justify-center text-[20px]">
+                <div class="border-2 border-green-500 h-auto">
+                   
+                    {%for key , value in l_p_data.items %}
+                        {% if key != 'ProductImg' and key != 'product_id' %}
+                            <div class=" flex gap-2 items-center border-2 ">
+                                <div class=" max-w-[200px] min-w-[200px] text-right">{{key}}</div>
+                                <div class="">:</div>
+                                <div class=" max-w-[70%] ">{{value}}</div>
+                            </div>
+                        {%endif%}
+                    {%endfor%}
+
+                </div>
+                </div>
+            </div>
+        </div>
+        <div class="bg-yellow-100 w-[100%-5px] h-[150px] m-5 mr-5 flex justify-center items-center gap-10">
+            <a href="{% url 'homepage:addToCart'%}?id={{id}}" class="flex justify-center items-center h-[70px] w-[250px] bg-orange-800 rounded-[50px]">Add To Cart</a>
+            <a href="{% url 'homepage:HomePage'%}" class="flex justify-center items-center h-[70px] w-[250px] bg-orange-800 rounded-[50px]">Buy</a>
+        </div>
+
+    </div>
+    
+{%endblock%}
+ 
+<!-- </body>
+</html> -->

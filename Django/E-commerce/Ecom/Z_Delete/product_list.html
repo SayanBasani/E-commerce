@@ -1,0 +1,357 @@
+{% extends "nav.html"%}
+{% block title %}Product List{% endblock %}
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    {%block style%}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Hind", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        a,
+        select {
+            text-decoration: none;
+        }
+
+        select {
+            border: 1px solid rgb(190, 188, 188);
+        }
+
+        div {
+            margin: 1px;
+            padding: 1px;
+            /* border: 1px solid black; */
+        }
+
+        body {
+            background-color: rgb(224, 225, 225);
+        }
+
+        h3 {
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .product_list_content {
+            padding: 10px;
+        }
+
+        .onclickSortBy {
+            /* border: 1px solid black; */
+            margin-left: 18%;
+        }
+
+        .serch_options {
+            position: fixed;
+            display: grid;
+            text-align: center;
+            gap: 1rem;
+            padding: 1rem;
+            width: 15rem;
+            justify-content: center;
+            padding: .5rem;
+            display: grid;
+            background-color: rgb(186, 222, 226);
+            margin-top: 1rem;
+        }
+
+        .serch_options-empty {
+            width: 15rem;
+        }
+
+        .onclickSortBy {
+            border-radius: 5px;
+            background-color: white;
+            top: 10px;
+            overflow: hidden;
+            display: grid;
+            gap: .5rem;
+            justify-content: center;
+            text-align: center;
+            height: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .filterOptions {
+            display: flex;
+            flex-direction: column;
+            /* gap: 1rem; */
+        }
+
+        .product_list_content {
+            display: grid;
+            grid-template-columns: 17rem 1fr;
+        }
+
+        .productDitels {
+            margin: 1rem;
+            display: grid;
+            grid-template-columns: auto 1fr;
+            /* grid-template-columns: 200px 1fr; */
+            gap: 2rem;
+            background-color: white;
+        }
+
+        .productName {
+            font-weight: 600;
+            font-size: 20px;
+        }
+
+        .productData {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 40px;
+            padding-inline: 0px;
+            gap: 15%;
+        }
+
+        .filterOption>* {
+            padding: 0;
+            margin: 0;
+        }
+
+        .filterOptions-style>div {
+            display: none;
+
+        }
+
+        .filterOptions>div {
+            display: block;
+        }
+
+        .FO_H {
+            background-color: rgb(127, 183, 190);
+            /* background-color: rgb(167, 234, 241); */
+            width: 200px;
+            border-radius: 5px;
+            height: 30px;
+            display: grid;
+            align-items: center;
+        }
+
+        .FO_ {
+            padding-inline: 3px;
+        }
+    {% endblock %}
+{%block content %}
+    <div class="product_list_content">
+
+        <div class="serch_options-empty"></div>
+        <div class="serch_options">
+            <div class="serch_option sortBy">
+                <h3>Sort By</h3>
+                <!-- sort options  -->
+                <input type="text" class="onclickSortBy_ops-input" hidden>
+                <select class="onclickSortBy">
+                    <option class="onclickSortBy_ops">Relevance</option>
+                    <option class="onclickSortBy_ops">Popularity</option>
+                    <option class="onclickSortBy_ops">Price -- Low to High</option>
+                    <option class="onclickSortBy_ops">Price -- High to Low</option>
+                    <option class="onclickSortBy_ops">Newest First</option>
+                </select>
+                <script>
+                    onclickSortBy_ops_input = document.querySelector('.onclickSortBy');
+                    onclickSortBy_ops_input.addEventListener("click",()=>{
+                        let inputval=onclickSortBy_ops_input.value
+                        document.querySelector(".onclickSortBy_ops-input").value=inputval
+                    });
+                </script>
+            </div>
+
+            <div class="serch_option filter">
+                <h3 class="filterOptions_h3">Filter</h3>
+
+                <div class="filterOptions">
+                    <!-- color,brand,size,faeric,desine,paterns,type,model , for whom ,waight -->
+                    <div class="filterOption">
+                        <h3 class="FO_H">color</h3>
+                        <div class="FO_">
+                            <div><input type="checkbox" class="cbox" name="" id=""> 123</div>
+                        </div>
+                    </div>
+                    <div class="filterOption">
+                        <h3 class="FO_H">brand</h3>
+                        <div class="FO_">
+                            <div><input type="checkbox" class="cbox" name="" id=""> 7000 mah</div>
+                        </div>
+
+                    </div>
+                    <div class="filterOption">
+                        <h3 class="FO_H">size</h3>
+                        <div class="FO_ fo">
+                            <div><input type="checkbox" class="cbox" name="" id=""> 4000 mah</div>
+                        </div>
+                    </div>
+                    <div class="filterOption">
+                        <h3 class="FO_H">waight</h3>
+                        <div class="FO_ fo">
+                            <div><input type="checkbox" class="cbox" name="" id=""> 4000 mah</div>
+                        </div>
+                    </div>
+                    <div class="filterOption">
+                        <h3 class="FO_H">Type of user</h3>
+                        <div class="FO_ fo">
+                            <div><input type="checkbox" class="cbox" name="" id=""> 4000 mah</div>
+                        </div>
+                    </div>
+                    <!-- age , waight , charge , size , material , brand , type  -->
+                    <div class="filterOption">
+                        <h3 class="FO_H">brand</h3>
+                        <div class="FO_ fo">
+                            <div><input type="checkbox" class="cbox" name="" id=""> 4000 mah</div>
+                        </div>
+                    </div>
+                    <div class="filterOption">
+                        <h3 class="FO_H">Type of user</h3>
+                        <div class="FO_ fo">
+                            <div><input type="checkbox" class="cbox" name="" id=""> 4000 mah</div>
+                        </div>
+                    </div>
+                    <div class="filterOption">
+                        <h3 class="FO_H">charge</h3>
+                        <div class="FO_ fo">
+                            <div><input type="checkbox" class="cbox" name="" id=""> 4000 mah</div>
+                        </div>
+                    </div>
+                    <!-- display size , display , battery , network , brand , ram & rom , waight,camera,procacers,warrenty,model number,color,sim slort,wifi , batery type,grafic , charging -->
+                    <div class="filterOption">
+                        <h3 class="FO_H">brand</h3>
+                        <div class="FO_ fo">
+                            <div><input type="checkbox" class="cbox" name="" id=""> 4000 mah</div>
+                        </div>
+                    </div>
+                    <div class="filterOption">
+                        <h3 class="FO_H">display</h3>
+                        <div class="FO_ fo">
+                            <div><input type="checkbox" class="cbox" name="" id=""> 4000 mah</div>
+                        </div>
+                    </div>
+                    <div class="filterOption">
+                        <h3 class="FO_H">display size</h3>
+                        <div class="FO_ fo">
+                            <div><input type="checkbox" class="cbox" name="" id=""> 4000 mah</div>
+                        </div>
+                    </div>
+                    <div class="filterOption">
+                        <h3 class="FO_H">network</h3>
+                        <div class="FO_ fo">
+                            <div><input type="checkbox" class="cbox" name="" id=""> 4000 mah</div>
+                        </div>
+                    </div>
+                    <div class="filterOption">
+                        <h3 class="FO_H"> ram & rom </h3>
+                        <div class="FO_ fo">
+                            <div><input type="checkbox" class="cbox" name="" id=""> 4000 mah</div>
+                        </div>
+                    </div>
+                    <div class="filterOption">
+                        <h3 class="FO_H">color</h3>
+                        <div class="FO_ fo">
+                            <div><input type="checkbox" class="cbox" name="" id=""> 4000 mah</div>
+                        </div>
+                    </div>
+                    <!-- size  , battery , wireless connection , brand , waight  ,warrenty, model number ,color, batery type , type , charging   -->
+                    <div class="filterOption">
+                        <h3 class="FO_H">brand</h3>
+                        <div class="FO_ fo">
+                            <div><input type="checkbox" class="cbox" name="" id=""> 4000 mah</div>
+                        </div>
+                    </div>
+                    <div class="filterOption">
+                        <h3 class="FO_H">brand</h3>
+                        <div class="FO_ fo">
+                            <div><input type="checkbox" class="cbox" name="" id=""> 4000 mah</div>
+                        </div>
+                    </div>
+                    <div class="filterOption">
+                        <h3 class="FO_H">brand</h3>
+                        <div class="FO_ fo">
+                            <div><input type="checkbox" class="cbox" name="" id=""> 4000 mah</div>
+                        </div>
+                    </div>
+                    <div class="filterOption">
+                        <h3 class="FO_H">brand</h3>
+                        <div class="FO_ fo">
+                            <div><input type="checkbox" class="cbox" name="" id=""> 4000 mah</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <script>
+            filterOptions_h3 = document.querySelector(".filterOptions_h3");
+            filterOption = document.querySelectorAll(".filterOption");
+            filterOption.forEach((opt)=>{
+                opt.style.display='none'
+            })
+            filterOptions_h3.addEventListener('click',()=>{
+                filterOption.forEach(element => {
+                    console.log(element.style.display);
+                    if(element.style.display== ""){
+                        element.style.display="none";
+                    }
+                    else{
+                        element.style.display="";
+                    }
+                });
+            });
+            heads = document.querySelectorAll(".FO_H")
+            head_op = document.querySelectorAll(".filterOption")
+            heads.forEach((head, index) => {
+                head.addEventListener("click", () => {
+                    console.log("index is " + index)
+                    if (classls[0] == "filterOption") {
+                        head_op[index].classList.remove("filterOption");
+                        head_op[index].classList.add("filterOptions-style");
+                    }
+                    else if (classls[0] == "filterOptions-style") {
+                        head_op[index].classList.remove("filterOptions-style");
+                        head_op[index].classList.add("filterOption");
+                    }
+                })
+            });
+            all_op = document.querySelectorAll(".FO_");
+            cBox = document.querySelectorAll(".cbox");
+            console.log(cBox)
+            all_op.forEach((op, index) => {
+                op.addEventListener("click", () => {
+                    if (cBox[index].checked == false) {
+                        op.style.backgroundColor = "rgb(131, 187, 198)";
+                        cBox[index].checked = true;
+                    } else {
+                        op.style.backgroundColor = "rgb(186, 222, 226)";
+                        cBox[index].checked = false;
+                    }
+                });
+            });
+        </script>
+
+<div class="productsArange">
+    {%for product in products%}
+    <div class="productDitels">
+        <div class="productImg">
+            <img src="" alt="" width="200px" height="200px" loading="lazy">
+        </div>
+        <div class="productData">
+            <div class="productName">{{product.Name}}</div>
+            <div class="productPrice">{{product.price}}</div>
+            <div class="productReating">{{product.option}}</div>
+        </div>
+    </div>
+    {%endfor%}
+    <script>
+        sortby=document.querySelector('.onclickSortBy').value
+        console.log(sortby)
+        sortby.foreach(element =>{
+            console.log(element)
+
+        })
+    </script>
+</div>
+</div>
+{%endblock%}

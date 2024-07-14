@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HomePage</title>
+    <style>
+        /* Basic CSS Styles */
+        body {
+          font-family: Arial, sans-serif;
+          margin: 0;
+          padding: 0;
+        }
+        header {
+          background-color: #333;
+          color: #fff;
+          padding: 10px 0;
+        }
+        .container {
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 0 20px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+        .navbar-brand {
+          font-size: 24px;
+          font-weight: bold;
+          text-decoration: none;
+          color: #fff;
+        }
+        .navbar-nav {
+          list-style: none;
+          margin: 0;
+          padding: 0;
+          display: flex;
+          align-items: center;
+        }
+        .navbar-nav li {
+          margin-left: 20px;
+        }
+        .nav-link {
+          text-decoration: none;
+          color: #fff;
+        }
+        .dropdown {
+          position: relative;
+        }
+        .dropdown-toggle::after {
+          content: '\25BE';
+          margin-left: 5px;
+        }
+        .dropdown-menu {
+          display: none;
+          position: absolute;
+          background-color: #333;
+          padding: 10px;
+          top: 100%;
+          left: 0;
+          min-width: 150px;
+          z-index: 1;
+        }
+        .dropdown:hover .dropdown-menu {
+          display: block;
+        }
+        .search-form {
+          display: flex;
+          margin-left: 20px;
+        }
+        .search-bar {
+          padding: 5px;
+          border: none;
+          border-radius: 3px;
+          margin-right: 5px;
+        }
+        .search-btn {
+          padding: 5px 10px;
+          border: none;
+          border-radius: 3px;
+          background-color: #555;
+          color: #fff;
+          cursor: pointer;
+        }
+        .slider {
+  width: 100%;
+  overflow: hidden;
+}
+
+.slide {
+  display: none;
+}
+
+.slide.active {
+  display: block;
+}
+
+/* CSS Animation */
+@keyframes slide {
+  0% { left: 0; }
+  33% { left: -100%; }
+  66% { left: -200%; }
+  100% { left: -200%; }
+}
+
+.slider .slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  animation: slide 6s infinite; /* 6 seconds for each image */
+}
+
+      </style>
+      </head>
+      <body>
+      
+      <header>
+        <nav class="navbar">
+          <div class="container">
+            <a href="#" class="navbar-brand">E-Commerce</a>
+            <ul class="navbar-nav">
+              <li><a href="#" class="nav-link">Home</a></li>
+              <li class="dropdown">
+                <a href="#" class="nav-link dropdown-toggle">Categories</a>
+                <ul class="dropdown-menu">
+                  <li><a href="#" class="dropdown-item">Category 1</a></li>
+                  <li><a href="#" class="dropdown-item">Category 2</a></li>
+                  <li><a href="#" class="dropdown-item">Category 3</a></li>
+                </ul>
+              </li>
+              <li>
+                <form class="search-form">
+                  <input type="text" placeholder="Search..." class="search-bar">
+                  <button type="submit" class="search-btn"><i class="fa fa-search"></i></button>
+                </form>
+              </li>
+              <li><a href="#" class="nav-link">Login</a></li>
+              <li><a href="#" class="nav-link">Sign Up</a></li>
+            </ul>
+          </div>
+        </nav>
+      </header>
+    </div>
+    <div class="Slide_Items">
+        <div class="slider">
+            <div class="slide active">
+              <img src="image1.jpg" alt="Image 1">
+              <p>sayan</p>
+            </div>
+            <div class="slide">
+              <img src="image2.jpg" alt="Image 2">
+            </div>
+            <div class="slide">
+              <img src="image3.jpg" alt="Image 3">
+            </div>
+          </div>
+          
+
+    </div>
+</body>
+</html>

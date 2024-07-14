@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login/Signup</title>
+    <!-- <link rel="stylesheet" href="login_page.css"> -->
+    <style>
+        *{
+            margin: 0;
+        }
+        /* ----------------- this main div -------------------- */
+        .log_sign{
+            height:700px;
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: column;
+            align-items: center;
+        }
+        /* ----------------- this logo div -------------------- */
+        .logo{
+            height: 60px;
+            width: 300px;
+            align-items: center;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* ------------------- css login element ---------------------  */
+        .login{
+            border: 2px solid rgb(202, 202, 202);
+            width: 300px;
+            padding-bottom: 20px;
+            flex-shrink: 50;
+            flex-wrap: wrap;
+            border-radius: 6px;
+        }
+        .login_elemnt{
+            /* border: 1px solid rgb(181, 104, 104); */
+            height: auto;
+        }
+        .login_1_head{
+            margin-top: 20px;
+            font-size:30px;
+
+          font-family: "Roboto", sans-serif;
+        }
+        .login_2_head{
+            font-size:15px;
+
+            font-family: "Roboto", sans-serif;
+        }
+        #login_2{
+            display: flex;
+            padding-top: 10px;
+        }
+        #login_3{
+            padding-top: 5px;
+        }
+        #login_3,#login_4,#login_5{
+            display: flex;
+            justify-content: center;
+            /* border: 2px solid black; */
+        }
+        .login_2_head,.login_1_head,#login_6,#login_email,.login_password,.submit_button,.policy{
+            margin-left: 20px ;
+            margin-right: 20px;
+        }
+        #login_email,.login_password,.submit_button{
+            /* width: 200px; */
+            width: 100%;
+            margin-top: 5px;
+            border: 2px solid rgb(202, 202, 202);
+
+        }
+        input{
+            border-radius: 5px;
+            padding: 4px;
+            margin: 5px;
+        }
+        input:disabled{
+            background-color:gray;	
+        }
+        input:placeholder-shown{
+            font-size:20px;	
+        }
+        input:hover{
+            border-color: color-mix(in srgb, rgb(243, 5, 5) 20%, yellow 60%);
+        }
+        .logo_comp{
+            height: 50px;
+        }
+        .submit_button{
+            /* margin: 7px; */
+            /* padding: 3px; */
+            /* width: 170px; */
+            height: 30px;
+            border-radius: 5px;
+            background-color: rgb(255, 234, 0);
+            border: 0px;
+        }
+        #login_6{
+            display: flex;
+            justify-content: start;
+            padding-top: 10px;
+            /* margin-left: 15px; */
+        }
+        .policy{
+            font-size: 14px;
+            margin-top: 10px;
+        }
+        /* ------------------ option of login is end --------------------- */
+        /* ------------------ option of sign is start --------------------- */
+
+        .br{
+            border: 1px solid rgb(202, 202, 202);
+            width: 300px;
+            margin: 20px;
+            margin: 20px;
+        }
+        .signup{
+            border: 2px solid rgb(202, 202, 202);
+            width: 300px;
+            height: 10px;
+            padding-bottom: 20px;
+            flex-shrink: 50;
+            flex-wrap: wrap;
+            border-radius: 6px;
+            border: 2px solid rgb(202, 202, 202);
+            display: flex;
+            justify-content: center;
+            text-decoration: none;
+            /* align-items: center; */
+            /* background-color: bisque; */
+        }
+        .signup_button{
+            height: 10px;
+            padding-top: 5px;
+            border-style: hidden;
+        }
+        button:hover{
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="log_sign">
+        <div class="logo"><img src="amazon.jpg" class="logo_comp" alt=""></div>
+<!-- ----------------- login element ------------------ -->
+        <div class="login">
+            <form action="" method="post">
+                {% csrf_token %}
+                <div class="login_elemnt" id="login_1"><p class="login_1_head">Sign in</p></div>
+                <div class="login_elemnt" id="login_2"><p class="login_2_head">Email or login id</p> </div>
+                <div class="login_elemnt" id="login_3"><input type="text" name="email" id="login_email" value="{{c_data.Email}}"></div>
+                <div class="login_elemnt" id="login_4"><input type="password" name="password" class="login_password" value="{{c_data.password}}"></div>
+                <div class="login_elemnt" id="login_5"><button class="submit_button" type="submit">Continue</button></div>
+                <div class="login_elemnt" id="login_7"><p class="policy">By continuing, you agree to Websight's Conditions of Use and <a href="">Privacy Notice</a>.</p></div>
+                <div class="login_elemnt" id="login_6"><a href="">Need help?</a></div>
+            </form>
+        </div>
+        <div class="br"></div>
+        <!-- --------------- sign up-------------------- -->
+        <a class="signup" href="{% url 'customer:Singup' %}"><button class="signup_button">Create your New account</button></a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block titel%} Out of Zone {%endblock%}  </title>
+    <style>
+        
+        *{
+            /* padding: 0; */
+            margin: 0;
+            /* box-sizing: border-box; */
+        }
+/* --------------- first nav css ---------------------- */
+        .nav1{
+            height: 70px;
+            background-color: rgb(78, 7, 117);
+            right: 0;
+            display: flex;
+            justify-content: space-around;
+            color: white;
+            font-size: 20px;
+            flex-wrap: wrap;
+        }
+        .nav1_item{
+            align-self: center;
+        }
+        .nav1_search{
+            width: 500px;
+            height: 30px;
+            border-radius: 10px;
+            /* flex-wrap: wrap; */
+            flex-shrink: 1000;
+        }
+        #nav1_1{
+            border-radius: 3px;
+        }
+        .nav1_login{
+            /* border-radius: 2px; */
+            border-style: hidden;
+            background: rgb(86, 11, 127);
+            /* color: white; */
+        }
+        .nav1_login_a{
+            text-decoration: none;
+            color: aliceblue;
+        }
+        #nav1_1:hover,.nav1_3:hover{
+            background-color: rgb(250, 248, 252);
+            color: rgb(78, 7, 117);
+            border-radius: 8px;
+        }
+        /* .nav1_login:hover{
+            background-color: white;
+            color: rgb(78, 7, 117);
+        } */
+        /* .nav1_3:hover{
+            background-color: white;
+            color: rgb(78, 7, 117);
+        } */
+        .nav1_login_a:hover{
+            background-color: white;
+            color: rgb(78, 7, 117);
+            border-radius: 8px;
+
+    }
+
+
+
+/* ---------------- second nav -------------------- */
+        .nav2{
+            display: flex;
+            background-color: rgb(92, 19, 131);
+            height: 35px;
+            justify-content: space-around;
+            /* border: 2px solid rgb(0, 0, 0); */
+
+        }
+        .nav2_item{
+            align-self: center;
+        }
+        .nav2_button{
+            background-color: transparent;
+            border-style: hidden;
+            padding: 8px;
+            color: white;
+
+        }
+
+    /* ----------------- banner of the home page -----------------*/
+    .home_banner{
+        /* border: 2px solid black; */
+        height: 250px;
+    }
+    /* ----------------- offer items of the home page -----------------*/
+    .body_offer_items{
+        /* border: 2px solid black; */
+        height: 300px;
+    }
+    
+
+    /* {% block style%}  {% endblock%} */
+    </style>
+</head>
+<body>
+    <!-- ---------------main nav -------------------- -->
+    <div class="nav1">
+        <div class="nav1_item" id="nav1_1">Home</div>
+        <div class="nav1_item" id="nav1_2"><input type="text" class="nav1_search" placeholder="   Search"></div>
+        <div class="nav1_item" id="nav1_3"><a class="nav1_login_a" href="{% url 'customer:user_login' %}">
+            {% if user_id %}
+            user_id['Name']
+            {% else %}
+            Login/Signup
+            {% endif %}
+            Login/Signup</a></div>
+        <!-- <div class="nav1_item" id="nav1_3"><button class="nav1_login"><a class="nav1_login_a" href="customer/user_login/">Login/Signup</a></button></div> -->
+    </div>
+    <!-- ---------------second nav -------------------- -->
+    <div class="nav2">
+        <div class="nav2_item" id="nav2_2"><button class="nav2_button" id="">Catagory</button></div>
+        <div class="nav2_item" id="nav2_3"><button class="nav2_button" id="">Populer</button></div>
+        <div class="nav2_item" id="nav2_1"><button class="nav2_button" id="">Best Sellers</button></div>
+        <div class="nav2_item" id="nav2_4"><button class="nav2_button" id="">Computer</button></div>
+        <div class="nav2_item" id="nav2_5"><button class="nav2_button" id="">Electronics</button></div>
+        <div class="nav2_item" id="nav2_6"><button class="nav2_button" id="">Gift Ideas</button></div>
+    </div>
+    {% block content %}{%endblock%}
+    <!-- ------------------- banner of the home page------------------------ -->
+    
+</body>
+</html>

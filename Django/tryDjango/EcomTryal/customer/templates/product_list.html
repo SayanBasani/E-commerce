@@ -1,0 +1,525 @@
+{% extends "nav.html"%}
+{% block title %}Product List{% endblock %}
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    {%block style%}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Hind", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        a,
+        select {
+            text-decoration: none;
+        }
+
+        select {
+            border: 1px solid rgb(190, 188, 188);
+        }
+
+        div {
+            margin: 1px;
+            padding: 1px;
+        }
+
+        body {
+            background-color: rgb(224, 225, 225);
+        }
+
+        h3 {
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .product_list_content {
+            padding: 10px;
+        }
+
+        .onclickSortBy {
+            /* border: 1px solid black; */
+            margin-left: 18%;
+        }
+
+        .serch_options {
+            position: fixed;
+            display: grid;
+            text-align: center;
+            gap: 1rem;
+            padding: 1rem;
+            width: 15rem;
+            justify-content: center;
+            padding: .5rem;
+            display: grid;
+            background-color: rgb(186, 222, 226);
+            margin-top: 1rem;
+        }
+
+        .serch_options-empty {
+            width: 15rem;
+        }
+
+        .onclickSortBy {
+            border-radius: 5px;
+            background-color: white;
+            top: 10px;
+            overflow: hidden;
+            display: grid;
+            gap: .5rem;
+            justify-content: center;
+            text-align: center;
+            height: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .filterOptions {
+            display: flex;
+            flex-direction: column;
+            /* gap: 1rem; */
+        }
+
+        .product_list_content {
+            display: grid;
+            grid-template-columns: 17rem 1fr;
+        }
+
+        .productDitels {
+            margin: 1rem;
+            display: grid;
+            grid-template-columns: auto 1fr;
+            /* grid-template-columns: 200px 1fr; */
+            gap: 2rem;
+            background-color: white;
+        }
+
+        .productName {
+            font-weight: 600;
+            font-size: 20px;
+        }
+
+        .productData {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 40px;
+            padding-inline: 0px;
+            gap: 15%;
+        }
+
+        .filterOption>* {
+            padding: 0;
+            margin: 0;
+        }
+
+        .filterOptions-style>div {
+            display: none;
+
+        }
+
+        .filterOptions>div {
+            display: block;
+        }
+
+        .FO_H {
+            background-color: rgb(127, 183, 190);
+            /* background-color: rgb(167, 234, 241); */
+            width: 200px;
+            border-radius: 5px;
+            height: 30px;
+            display: grid;
+            align-items: center;
+        }
+
+        .FO_ {
+            padding-inline: 3px;
+        }
+
+
+
+        /* CSS styles for product display */
+        .productDitels {
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+        .productImg img {
+            max-width: 200px;
+            max-height: 200px;
+        }
+        div{
+            <!-- border: 1px solid black; -->
+        }
+        .productDitels {
+        margin: 1rem;
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: 2rem;
+        background-color: white;
+        border-radius: 10px; /* Adding border radius */
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Adding box shadow */
+    }
+    
+    .productImg img {
+        width: 200px;
+        height: 200px;
+        border-radius: 10px; /* Adding border radius to the image */
+        object-fit: cover; /* Ensuring the image fills the container */
+    }
+    
+    .productData {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 20px; /* Adjusting padding */
+    }
+    
+    .productName {
+        font-weight: bold; /* Making product name bold */
+        font-size: 1.2rem; /* Adjusting font size */
+    }
+    
+    .productPrice {
+        font-size: 1.1rem; /* Adjusting font size */
+        color: green; /* Changing price color */
+    }
+    
+    .productReating {
+        font-size: 1rem; /* Adjusting font size */
+        color: #f1c40f; /* Changing rating color */
+    }
+    
+
+
+    {% endblock %}
+{%block content %}
+    <div class="product_list_content">
+
+        <div class="serch_options-empty"></div>
+        <div class="serch_options">
+            <div class="serch_option sortBy">
+                <h3>Sort By</h3>
+                <!-- sort options  -->
+                <input type="text" class="onclickSortBy_ops-input" hidden>
+                <select class="onclickSortBy">
+                    <option class="onclickSortBy_ops">Relevance</option>
+                    <option class="onclickSortBy_ops">Popularity</option>
+                    <option class="onclickSortBy_ops">Price -- Low to High</option>
+                    <option class="onclickSortBy_ops">Price -- High to Low</option>
+                    <!-- <option class="onclickSortBy_ops">Newest First</option> -->
+                </select>
+            </div>
+
+            <div class="serch_option filter">
+                <h3 class="filterOptions_h3">Filter</h3>
+
+                <div class="filterOptions">
+                    <!-- color,brand,size,faeric,desine,paterns,type,model , for whom ,waight -->
+                    <div class="filterOption">
+                        <h3 class="FO_H">color</h3>
+                        <div class="FO_">
+                            <div><input type="checkbox" class="cbox" name="" id=""> 123</div>
+                        </div>
+                    </div>
+                    <div class="filterOption">
+                        <h3 class="FO_H">brand</h3>
+                        <div class="FO_">
+                            <div><input type="checkbox" class="cbox" name="" id=""> 7000 mah</div>
+                        </div>
+
+                    </div>
+                    <div class="filterOption">
+                        <h3 class="FO_H">size</h3>
+                        <div class="FO_ fo">
+                            <div><input type="checkbox" class="cbox" name="" id=""> 4000 mah</div>
+                        </div>
+                    </div>
+                    <div class="filterOption">
+                        <h3 class="FO_H">waight</h3>
+                        <div class="FO_ fo">
+                            <div><input type="checkbox" class="cbox" name="" id=""> 4000 mah</div>
+                        </div>
+                    </div>
+                    <div class="filterOption">
+                        <h3 class="FO_H">Type of user</h3>
+                        <div class="FO_ fo">
+                            <div><input type="checkbox" class="cbox" name="" id=""> 4000 mah</div>
+                        </div>
+                    </div>
+                    <!-- age , waight , charge , size , material , brand , type  -->
+                    <div class="filterOption">
+                        <h3 class="FO_H">brand</h3>
+                        <div class="FO_ fo">
+                            <div><input type="checkbox" class="cbox" name="" id=""> 4000 mah</div>
+                        </div>
+                    </div>
+                    <div class="filterOption">
+                        <h3 class="FO_H">Type of user</h3>
+                        <div class="FO_ fo">
+                            <div><input type="checkbox" class="cbox" name="" id=""> 4000 mah</div>
+                        </div>
+                    </div>
+                    <div class="filterOption">
+                        <h3 class="FO_H">charge</h3>
+                        <div class="FO_ fo">
+                            <div><input type="checkbox" class="cbox" name="" id=""> 4000 mah</div>
+                        </div>
+                    </div>
+                    <!-- display size , display , battery , network , brand , ram & rom , waight,camera,procacers,warrenty,model number,color,sim slort,wifi , batery type,grafic , charging -->
+                    <div class="filterOption">
+                        <h3 class="FO_H">brand</h3>
+                        <div class="FO_ fo">
+                            <div><input type="checkbox" class="cbox" name="" id=""> 4000 mah</div>
+                        </div>
+                    </div>
+                    <div class="filterOption">
+                        <h3 class="FO_H">display</h3>
+                        <div class="FO_ fo">
+                            <div><input type="checkbox" class="cbox" name="" id=""> 4000 mah</div>
+                        </div>
+                    </div>
+                    <div class="filterOption">
+                        <h3 class="FO_H">display size</h3>
+                        <div class="FO_ fo">
+                            <div><input type="checkbox" class="cbox" name="" id=""> 4000 mah</div>
+                        </div>
+                    </div>
+                    <div class="filterOption">
+                        <h3 class="FO_H">network</h3>
+                        <div class="FO_ fo">
+                            <div><input type="checkbox" class="cbox" name="" id=""> 4000 mah</div>
+                        </div>
+                    </div>
+                    <div class="filterOption">
+                        <h3 class="FO_H"> ram & rom </h3>
+                        <div class="FO_ fo">
+                            <div><input type="checkbox" class="cbox" name="" id=""> 4000 mah</div>
+                        </div>
+                    </div>
+                    <div class="filterOption">
+                        <h3 class="FO_H">color</h3>
+                        <div class="FO_ fo">
+                            <div><input type="checkbox" class="cbox" name="" id=""> 4000 mah</div>
+                        </div>
+                    </div>
+                    <!-- size  , battery , wireless connection , brand , waight  ,warrenty, model number ,color, batery type , type , charging   -->
+                    <div class="filterOption">
+                        <h3 class="FO_H">brand</h3>
+                        <div class="FO_ fo">
+                            <div><input type="checkbox" class="cbox" name="" id=""> 4000 mah</div>
+                        </div>
+                    </div>
+                    <div class="filterOption">
+                        <h3 class="FO_H">brand</h3>
+                        <div class="FO_ fo">
+                            <div><input type="checkbox" class="cbox" name="" id=""> 4000 mah</div>
+                        </div>
+                    </div>
+                    <div class="filterOption">
+                        <h3 class="FO_H">brand</h3>
+                        <div class="FO_ fo">
+                            <div><input type="checkbox" class="cbox" name="" id=""> 4000 mah</div>
+                        </div>
+                    </div>
+                    <div class="filterOption">
+                        <h3 class="FO_H">brand</h3>
+                        <div class="FO_ fo">
+                            <div><input type="checkbox" class="cbox" name="" id=""> 4000 mah</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        
+        <div class="productsArange" >
+            {%for product in products%}
+            <!-- <h5>{{product}}</h5> -->
+            <div class="productDitels">
+                <div class="productImg">
+                    <!-- <a href="{% url 'Seller:sellerUplod' %}?data={{data}}" class="seller_btn  uplod">Uplod</a> -->
+                    <a href="{% url 'homepage:product' %}?id={{product.product_id}}"><img src="{{product.ProductImg}}" alt="" width="200px" height="200px" loading="lazy"></a>
+                </div>
+                <div class="productData">
+                    <a href="{% url 'homepage:product' %}?id={{product.product_id}}"><div class="productName">{{product.Name}}</div></a>
+                    <div class="productPrice">{{product.price}}</div>
+                    <div class="productReating">{{product.option}}</div>
+                </div>
+            </div>
+            {%endfor%}
+        </div>
+    </div>
+
+
+    <div class="product_hidden_data" hidden>{{products}}</div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script>
+    // Function to generate HTML for each product and insert into the page
+    function renderProducts(products) {
+        // remove the present divs whis contens ditels of all serched product 
+        remdiv = document.querySelectorAll('.productDitels')
+        remdiv.forEach(function(div) {
+            div.remove();
+        })
+        var productContainer = document.querySelector('.productsArange');
+
+        // Clear existing content
+        productContainer.innerHTML = '';
+
+        // Iterate through products and generate HTML
+        products.forEach(function(product) {
+            var productDiv = document.createElement('div');
+            productDiv.className = 'productDitels';
+
+            var productImgDiv = document.createElement('div');
+            productImgDiv.className = 'productImg';
+            var img = document.createElement('img');
+            img.src = ''; // Add your image source here
+            img.alt = 'Product Image';
+            img.width = '200';
+            img.height = '200';
+            img.loading = 'lazy';
+            productImgDiv.appendChild(img);
+
+            var productDataDiv = document.createElement('div');
+            productDataDiv.className = 'productData';
+            var productNameDiv = document.createElement('div');
+            productNameDiv.className = 'productName';
+            productNameDiv.textContent = product.Name;
+            var productPriceDiv = document.createElement('div');
+            productPriceDiv.className = 'productPrice';
+            productPriceDiv.textContent = product.price;
+            var productReatingDiv = document.createElement('div');
+            productReatingDiv.className = 'productReating';
+            productReatingDiv.textContent = product.option;
+
+            productDataDiv.appendChild(productNameDiv);
+            productDataDiv.appendChild(productPriceDiv);
+            productDataDiv.appendChild(productReatingDiv);
+
+            productDiv.appendChild(productImgDiv);
+            productDiv.appendChild(productDataDiv);
+
+            productContainer.appendChild(productDiv);
+        });
+    }
+
+    // this is use to change the data from string to json
+    function get_pyJson_to_jsJson(callback){
+        $(document).ready(function(){
+            var product_hidden_data=$(".product_hidden_data").text()
+            product_hidden_data=conv(product_hidden_data)
+            product_hidden_data=JSON.parse(product_hidden_data.replace(/None/g, 'null'))
+            console.log("before print json")
+            // console.log(product_hidden_data)
+            console.log("after print json")
+            count = 0 
+            // callback(product_hidden_data);
+        });
+        console.log(product_hidden_data)
+    }
+    
+    var product_hidden_data=$(".product_hidden_data").text()
+    product_hidden_data=conv(product_hidden_data)
+    product_hidden_data=JSON.parse(product_hidden_data.replace(/None/g, 'null'))
+
+    // this is use to convert ' to " for py json and js json
+    function conv(data) {
+        // console.log("Original data:", data);
+        let emptdata = '';
+        for (var i = 0; i < data.length; i++) {
+            if (data[i] === "'") {
+                emptdata += '"';
+            } else {
+                emptdata += data[i];
+            }
+        }
+        return emptdata;
+    }
+    
+    </script>
+
+    <script>
+        onclickSortBy_ops_input = document.querySelector('.onclickSortBy');
+        onclickSortBy_ops_input.addEventListener("click",()=>{
+            let inputval=onclickSortBy_ops_input.value
+            document.querySelector(".onclickSortBy_ops-input").value=inputval
+            if(inputval == "Price -- Low to High"){
+                // it is rearrange this jsons "price" low to high 
+                console.log("let for next ok")
+                console.log(product_hidden_data);
+                console.log("let for next ok ........... ")
+                product_hidden_data.sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
+                console.log(product_hidden_data)
+                renderProducts(product_hidden_data)
+
+            }
+            else if(inputval == "Price -- High to Low"){
+                // it is rearrange this jsons "price" high to low
+                console.log("let for next ok")
+                console.log(product_hidden_data);
+                console.log("let for next ok ........... ")
+                product_hidden_data.sort((a, b) => parseFloat(b.price) - parseFloat(a.price));
+                renderProducts(product_hidden_data)
+            }
+        });
+
+
+        filterOptions_h3 = document.querySelector(".filterOptions_h3");
+        filterOption = document.querySelectorAll(".filterOption");
+        filterOption.forEach((opt)=>{
+            opt.style.display='none'
+        })
+        filterOptions_h3.addEventListener('click',()=>{
+            filterOption.forEach(element => {
+                // console.log(element.style.display);
+                if(element.style.display== ""){
+                    element.style.display="none";
+                }
+                else{
+                    element.style.display="";
+                }
+            });
+        });
+        heads = document.querySelectorAll(".FO_H")
+        head_op = document.querySelectorAll(".filterOption")
+        heads.forEach((head, index) => {
+            head.addEventListener("click", () => {
+                // console.log("index is " + index)
+                if (classls[0] == "filterOption") {
+                    head_op[index].classList.remove("filterOption");
+                    head_op[index].classList.add("filterOptions-style");
+                }
+                else if (classls[0] == "filterOptions-style") {
+                    head_op[index].classList.remove("filterOptions-style");
+                    head_op[index].classList.add("filterOption");
+                }
+            })
+        });
+        all_op = document.querySelectorAll(".FO_");
+        cBox = document.querySelectorAll(".cbox");
+        // console.log(cBox)
+        all_op.forEach((op, index) => {
+            op.addEventListener("click", () => {
+                if (cBox[index].checked == false) {
+                    op.style.backgroundColor = "rgb(131, 187, 198)";
+                    cBox[index].checked = true;
+                } else {
+                    op.style.backgroundColor = "rgb(186, 222, 226)";
+                    cBox[index].checked = false;
+                }
+            });
+        });
+
+
+
+        // sortby=document.querySelector('.onclickSortBy').value
+        // console.log(sortby)
+        // sortby.forEach((element) =>{
+        //     console.log(element)
+
+        // })
+    </script>
+{%endblock%}

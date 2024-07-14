@@ -1,0 +1,176 @@
+{% extends "nav.html"%}
+    {% block title %}Home Page{% endblock %}
+    <!-- <link rel="stylesheet" href="Try_home1.css"> -->
+    {% block style %}
+    *{
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+    /* ------------- first nav css ---------------------- */
+    .nav1{
+        height: 85px;
+        background-color: rgb(78, 7, 117);
+        right: 0;
+        display: flex;
+        justify-content: space-around;
+        color: white;
+        font-size: 20px;
+        flex-wrap: wrap;
+    }
+    .nav1_item{
+        align-self: center;
+    }
+    .nav1_item:hover{
+        <!-- background-color: rgb(250, 248, 252); -->
+        color: rgb(78, 7, 117);
+        border-radius: 8px;
+    }
+    .nav1_search{
+        width: 500px;
+        height: 30px;
+        border-radius: 10px;
+        flex-shrink: 1000;
+    }
+    #nav1_1{
+        border-radius: 3px;
+    }
+    .nav1_login{
+        border-radius: 2px;
+        border-style: hidden;
+        background: rgb(86, 11, 127);
+        color: white;
+        height: 25px;
+    }
+    .nav1_login:hover{
+        background-color: white;
+        color: rgb(78, 7, 117);
+    }
+
+
+
+    /* -------------- second nav -------------------- */
+    .nav2{
+        display: flex;
+        background-color: rgb(92, 19, 131);
+        height: 35px;
+        justify-content: space-around;
+
+    }
+    .nav2_item{
+        align-self: center;
+    }
+    .nav2_button{
+        background-color: transparent;
+        border-style: hidden;
+        padding: 8px;
+        color: white;
+
+    }
+    /* ----------------- banner of the home page -----------------*/
+    .home_banner_image_1{
+        width: 100%;
+        height: auto;
+        overflow: hidden;
+        z-index: -1;
+        position: absolute;
+        /* border: 2px solid; */
+        top: 120px;
+    }
+    /* ----------------- offer items of the home page -----------------*/
+
+    .offers{
+        display: grid;
+        grid: auto-flow dense / 32% 32% 32%;
+        padding-top: 17%;
+        margin: 2%;
+        gap: 2%;
+    }
+    .items-offers{
+        display: grid;
+        grid-template-columns: 100% ;
+        grid-template-columns: 50% 50%;
+        grid-template-areas: 
+        'header header'
+        ;
+        background-color: aliceblue;
+    }
+    .items-offers-element{
+        margin: 5%;
+        height: auto;
+    }
+    .items-offers-element_img{
+        width: 100%;
+        /* border: 2px solid violet; */
+    }
+    .items-offers-element_name{
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        font-size: 12px;
+    }
+    .items-offers_intro{
+        grid-area: header;
+        padding: 2px;
+        font-size: 21px;
+        display: flex;
+        flex-wrap: nowrap;
+    }
+    .items-offers-element_button{
+        border-style: hidden;
+    }
+
+    {%endblock%}
+<!-- </head>
+<body> -->
+    {% block content %}
+    <!-- ---------------main nav -------------------- -->
+    <!-- <div class="nav1">
+        <div class="nav1_item" id="nav1_1">Home</div>
+        <div class="nav1_item" id="nav1_2"><input type="text" class="nav1_search" placeholder="   Search"></div>
+        <div class="nav1_item" id="nav1_3"><button class="nav1_login">Login/Signup</button></div>
+    </div> -->
+    <!-- ---------------second nav -------------------- -->
+    <div class="nav2">
+        <div class="nav2_item" id="nav2_2"><button class="nav2_button" id="">Catagory</button></div>
+        <div class="nav2_item" id="nav2_3"><button class="nav2_button" id="">Populer</button></div>
+        <div class="nav2_item" id="nav2_1"><button class="nav2_button" id="">Best Sellers</button></div>
+        <div class="nav2_item" id="nav2_4"><button class="nav2_button" id="">Computer</button></div>
+        <div class="nav2_item" id="nav2_5"><button class="nav2_button" id="">Electronics</button></div>
+        <div class="nav2_item" id="nav2_6"><button class="nav2_button" id="">Gift Ideas</button></div>
+    </div>
+    <!-- ------------------- banner of the home page------------------------ -->
+    <div class="home_banner">
+        <button href="facebook.com"> <img src="https://source.unsplash.com/random/1600x600?banner" alt="Latest Offer"  class="home_banner_image_1"></button>
+        <!--  -------------------try to place offer -------------------------- -->
+        <div class="offers">
+            <div class="items-offers">
+                <div class="items-offers_intro"><h2 class="items-offers_intro-p">Starting ₹99 | Amazon Brands & more</h2></div>
+                <div class="items-offers-element"><button   class="items-offers-element_button"><img src="https://source.unsplash.com/random/600x400?gadgets" class="items-offers-element_img" alt=""></button><span class="items-offers-element_name">watch</span></div>
+                <div class="items-offers-element"><button   class="items-offers-element_button"><img src="https://source.unsplash.com/random/600x400?gadgets" class="items-offers-element_img" alt=""></button><span class="items-offers-element_name">toy</span></div>
+                <div class="items-offers-element"><button   class="items-offers-element_button"><img src="https://source.unsplash.com/random/600x400?gadgets" class="items-offers-element_img" alt=""></button><span class="items-offers-element_name">boots</span></div>
+                <div class="items-offers-element"><button   class="items-offers-element_button"><img src="https://source.unsplash.com/random/600x400?gadgets" class="items-offers-element_img" alt=""></button><span class="items-offers-element_name">mobile</span></div>
+            </div>
+            <div class="items-offers">
+                
+                <div class="items-offers_intro"><h2 class="items-offers_intro-p">Starting ₹99 | Amazon Brands & more</h2></div>
+                <div class="items-offers-element"><button   class="items-offers-element_button"><img src="https://source.unsplash.com/random/600x400?gadgets" class="items-offers-element_img" alt=""></button><span class="items-offers-element_name">watch</span></div>
+                <div class="items-offers-element"><button   class="items-offers-element_button"><img src="https://source.unsplash.com/random/600x400?gadgets" class="items-offers-element_img" alt=""></button><span class="items-offers-element_name">toy</span></div>
+                <div class="items-offers-element"><button   class="items-offers-element_button"><img src="https://source.unsplash.com/random/600x400?gadgets" class="items-offers-element_img" alt=""></button><span class="items-offers-element_name">boots</span></div>
+                <div class="items-offers-element"><button   class="items-offers-element_button"><img src="https://source.unsplash.com/random/600x400?gadgets" class="items-offers-element_img" alt=""></button><span class="items-offers-element_name">mobile</span></div>
+            
+            </div>
+            <div class="items-offers">
+                
+                <div class="items-offers_intro"><h2 class="items-offers_intro-p">Starting ₹99 | Amazon Brands & more</h2></div>
+                <div class="items-offers-element"><button   class="items-offers-element_button"><img src="https://source.unsplash.com/random/600x400?gadgets" class="items-offers-element_img" alt=""></button><span class="items-offers-element_name">watch</span></div>
+                <div class="items-offers-element"><button   class="items-offers-element_button"><img src="https://source.unsplash.com/random/600x400?gadgets" class="items-offers-element_img" alt=""></button><span class="items-offers-element_name">toy</span></div>
+                <div class="items-offers-element"><button   class="items-offers-element_button"><img src="https://source.unsplash.com/random/600x400?gadgets" class="items-offers-element_img" alt=""></button><span class="items-offers-element_name">boots</span></div>
+                <div class="items-offers-element"><button   class="items-offers-element_button"><img src="https://source.unsplash.com/random/600x400?gadgets" class="items-offers-element_img" alt=""></button><span class="items-offers-element_name">mobile</span></div>
+            
+            </div>
+        </div>
+    </div>
+    {% endblock %}
+    <!-- ------------------- best offer items of the home page ------------------- -->
+
+<!-- </body>
+</html> -->

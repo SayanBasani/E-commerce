@@ -1,0 +1,27 @@
+    {% extends "nav.html"%}
+    {%block style%}
+    {% endblock %}
+{%block content %}
+    
+<div class="bg-[rgb(224,225,225)]">
+    <div class="myAllOrders grid gap-7 m-3">
+        <div class="myOrderNav bg-slate-400 h-10 flex items-center px-3">
+            <a href="" class="flex items-center">
+                <span class="material-symbols-outlined text-[40px]">
+                    keyboard_backspace
+                </span>
+            </a>
+        </div>
+        <div class="about_fiew grid grid-flow-col gap-2 bg-white px-10 my-5">
+            <a class="img flex justify-center items-center overflow-hidden" href="{% url 'customer:aboutOrder' %}"><img src="https://img.freepik.com/free-photo/abstract-autumn-beauty-multi-colored-leaf-vein-pattern-generated-by-ai_188544-9871.jpg" alt="" class="max-w-[300px] max-sm:w-[100%]"></a>
+            <div class="grid justify-center items-center">
+                <a href="{% url 'customer:aboutOrder' %}" class="sm:h-[40px] mx-sm:h-[25px] max-sm:text-[15px] sm:text-[25px] font-semibold inline-block overflow-x-hidden">Boat HeadPhone Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro, similique.</a>
+                <div class="material-symbols-outlined h-[40px] max-sm:text-[15px] sm:text-[25px] flex items-center overflow-hidden">2499 currency_rupee</div>
+                <div class="status flex items-center gap-5 font-medium">Delivery status : <div class="w-3 h-3 bg-green-400"></div></div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+{%endblock%}

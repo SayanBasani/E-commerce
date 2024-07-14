@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Only Nav{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script> -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Hind", sans-serif;
+            font-weight: 300;
+            font-style: normal;
+        }
+        body{
+            background-color: rgb(224, 225, 225);
+            /* height: 1000px; */
+        }
+        .material-symbols-outlined,.material-icons{
+            color: rgb(46, 118, 243);
+        }
+        a{
+            text-decoration: none;
+            color: black;
+        }
+        .navBody{
+            display: grid;
+            gap: 5px;
+            grid-template-columns: 1fr 3fr 10fr 3fr 3fr 3fr;
+            height: 70px;
+            width: 100%;
+            background-color: rgb(255, 255, 255);
+            align-items: center;
+        }
+        .navEle{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height:40px;
+            overflow: hidden;
+        }
+        .logo{
+            overflow: hidden;
+            width: 160px;
+            height: 40p;
+            padding: 15px;
+
+        }
+        .logo_img{
+            width: 160px;
+            height: 40p;
+        }
+        .dot3{
+            font-size:30px;
+            font-weight: bold;
+            cursor: pointer;
+
+        }
+        .serchBar-input{
+            border-style: none;
+            background-color: rgb(213, 229, 245);
+            height: 40px;
+            width: 100%;
+            border-radius: 10px;
+        }
+        .navBody-button{
+            height: 90%;
+            padding-inline: 10px;
+            font-size: 20px;
+            color: black;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .profile-btn:hover{
+            background-color: rgb(246, 246, 246);
+            border: 1px solid rgb(174, 174, 174);
+            border-radius: 7px;
+        }
+
+        /* ------------------------ side nav --------------------- */
+
+        .sideNav{
+            
+            width: 400px;
+            overflow: hidden;
+            position: absolute;
+            left: -50%;
+            background-color: rgb(255, 255, 255);
+            transition: 0.5s ease-in-out;
+            z-index: 1;
+        }
+        .sideNav > div{
+            margin: 2px ;
+            
+        }
+        .sideNav_opt{
+            display: flex;
+            flex-direction: column;
+            margin-left: 10px;
+        }
+        .sideNav_opt > header{
+            font-weight: bold;
+            color: #878787;
+            font-size: 16px;
+            padding: 10px;
+        }
+        .sideNav_Singup_logo,.material-icons{
+            width: 43px;
+            height: 43px;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 30px;
+        }
+        .sideNav_Singup_close{
+            margin-left: 40px;
+        }
+        .sideNav_Singup_close>span{
+            color: black;
+            font-size: 30px;
+        }
+        .sideNav_order,header{
+            display: flex;
+            align-items: center;
+            height: 60px;
+            padding: 10px;
+        }
+        .sideNav_Singup>a{
+            padding: 10px;
+            display: flex;
+            flex-direction: row;
+        }
+        .sideNav_Singup_text{
+            display: flex;
+            flex-direction: column;
+            padding-left: 20px;
+        }
+        .sideNav_Singup_text>.a{
+            font-size: 12px;
+        }
+        .sideNav_Singup_text>.b{
+            font-size: 16px;
+        }
+        .sideNav_order>a{
+            font-size: 25px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: row;
+        }
+        .sideNav_order_text{
+            padding-left: 20px;
+            color: #878787;
+        }
+        .sideNav_opt>a{
+            display: flex;
+            align-items: center;
+            height: 40px;
+            margin-left: 40px;
+        }
+        .sideNav_opt>a:hover,.sideNav-opt>a:hover,.sideNav_order_text:hover{
+            color: rgb(46, 118, 243);
+        }
+        .serchForm{
+            height: 40px;
+            width: 100%;
+        }
+        {% block style %} {%endblock%}
+    </style>
+    
+</head>
+<body>
+    <div class="sideNav">
+        <div class="sideNav-opt sideNav_Singup">
+            <a href="#">
+                <div class="sideNav_Singup_logo"><i class="material-icons" style="color: black;">account_circle</i></div>
+                <div style="border-style: non; background-color: white;">
+                    {% if c_data.page_T == "Customer" %}
+                        <button style="border-style: none; background-color: white;">
+                            <div class="a">Hello,</div>
+                            <div class="b">{{ c_data.Name }}</div>
+                        </button>
+                    {% elif s_data.page_T == "Seller" %}
+                        <button style="border-style: none; background-color: white;">
+                            <div class="a">Hello,</div>
+                            <div class="b"> {{s_data.Name}}</div>
+                        </button>
+                    {% else %}
+                        <div class="a">Please,</div>
+                        <div class="b">Login/Signup</div>
+                    {% endif %}
+                </div>
+                <div class="sideNav_Singup_close" onclick="closenav()" style="padding: 12px;"><span class="material-symbols-outlined" onclick="closenav()">close</span></div>
+            </a>
+        </div>
+        <div class="sideNav-opt sideNav_order">
+            <a href="#">
+                <i class="material-icons">shopping_cart</i>
+                <div class="sideNav_order_text">
+                    My order
+                </div>
+            </a>
+        </div>
+        <div class="sideNav_opt">
+
+            <header>
+                <span class="material-symbols-outlined">
+                    person
+                </span>
+                <div class="sideNav_order_text">
+                    Profile Settings
+                </div>
+            </header>
+            <a href="#">Profile Management</a>
+            <a href="#">Manage Address</a>
+            <a href="#">Pan Card Manage</a>
+            
+            <header>
+                <span class="material-symbols-outlined">
+                    payments
+                </span>
+                <div class="sideNav_order_text">
+                    Payments
+                </div>
+            </header>
+            <a href="#">Gift Cards</a>
+            <a href="#">Saved UPI</a>
+            <a href="#">Saved Cards</a>
+            
+            <header>
+                <span class="material-symbols-outlined">
+                    trending_up
+                </span>
+                <div class="sideNav_order_text">
+                    Trending
+                </div>
+            </header>            
+            <a href="#">Best Sells</a>
+            <a href="#">New Release</a>
+            <a href="#">Offers</a>
+
+            <header>
+                <span class="material-symbols-outlined">
+                    category
+                </span>
+                <div class="sideNav_order_text">
+                    Category
+                </div>
+            </header>             
+            <a href="#">Mobile, Laptop, Computer</a>
+            <a href="#">Men fashion</a>
+            <a href="#">Women fashion</a>
+            <a href="#">Other</a>
+            
+            <!--  Earn with Sells
+Sells Creator Studio
+My Sells    -->
+            <header>
+                <span class="material-symbols-outlined">
+                    sell
+                </span>
+                <div class="sideNav_order_text">
+                    Earn with Sells
+                </div>
+            </header>             
+            <a href="{% url 'Seller:sellerHome'%}">Sells Creator Studio</a>
+            <a href="#">My Sells</a>
+            <!-- <a href="#">Women fashion</a>
+            <a href="#">Other</a> -->
+            <!--      -->
+            <header>
+                <span class="material-symbols-outlined">
+                    help
+                </span>
+                <div class="sideNav_order_text">
+                    Help
+                </div>
+            </header>      
+            <a href="#">Custemor Service</a>
+            <a href="#">Terms & Conditions</a>
+            {% if data %}
+                <a href="{% url 'customer:logOutCustomer' %}">Log Out</a>
+            {% else %}
+                <a href="{% url 'customer:user_login'%}">Login/Signup</a>
+            {%endif%}
+
+        </div>
+    </div>
+    <div class="navBody">
+        <div class="navEle dot3" onclick="opennav()">&#9776;</div>
+        <div class="navEle logo"><a class="logo_img" href="{% url 'homepage:HomePage'%}" alt="">HOME</a></div>
+        <div class="navEle serchBar">
+            <form id="searchForm" action="{% url 'customer:product_list' %}" method="get" class="serchForm">{% csrf_token %}
+                <input type="text" name="search" class="serchBar-input" style="padding: 3px;" placeholder="  Search For Product, Brand and More">
+                <button type="submit" style="display: none;">Search</button>
+            </form>
+        </div>
+        
+        <script>
+            document.getElementById("searchForm").addEventListener("submit", function(event) {
+                event.preventDefault(); // Prevent default form submission
+                
+                var searchQuery = document.querySelector(".serchBar-input").value.trim(); // Get the search query from the input field
+                if (searchQuery) {
+                    var url = "{% url 'customer:product_list' %}?search=" + encodeURIComponent(searchQuery); // Construct the URL with the search query parameter
+                    window.location.href = url; // Redirect to the product list page with the search query
+                }
+            });
+        </script>
+        
+        <div class="navEle profile"><div class="navBody-button profile-btn">
+            {% if c_data.page_T == "Customer" %}
+                <button class="navBody-button" style="border-style: none; background-color: white; border-radius: 5px;">
+                    {{c_data.Name}}
+                </button>
+            {% elif s_data.page_T == "Seller" %}
+                <button class="navBody-button" style="border-style: none; background-color: white; border-radius: 5px;">
+                    {{s_data.Name}}
+                </button>
+            {% else %}
+                <a href="{% url 'customer:user_login'%}">Login/Signup</a>
+            {% endif %}
+            </div></div>
+        <div class="navEle cart"><a href="{% url 'customer:cart'%}" class="navBody-button cart-btn">Cart</a></div>
+        <div class="navEle notifaction"><a href="" class="navBody-button notifaction-btn">notifaction</a></div>
+    </div>
+
+
+    <!-- by my old prog -->
+    <script>
+        function closenav(){
+            document.querySelector(".sideNav").style.left='-50%';
+        }
+        function opennav(){
+            console.log("clicked");
+            document.querySelector('.sideNav').style.left="0%";
+        }
+    </script>
+
+    {% block content %}  {%endblock%}
+</body>
+</html>

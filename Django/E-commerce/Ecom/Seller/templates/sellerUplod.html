@@ -1,0 +1,434 @@
+    {%extends 'nav.html' %}
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+    <!-- <title>Seller Uplod</title> -->
+    {% block titel %} Seller Uplod {% endblock %}
+    <!-- <link rel="stylesheet" href="sellerUplod2.css">     -->
+    <!-- <style> -->
+    {% block style %}
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Hind", sans-serif;
+            font-weight: 300;
+            font-style: normal;
+        }
+        body{
+            background-color: rgb(224, 225, 225);
+        }
+        div{
+            /* border: 1px solid black; */
+            padding: 1px;
+            margin: 1px;
+        }
+        .seller_uplode{
+            display: grid;
+            gap: 10px;
+            grid-template-columns: 200px 1fr;
+        }
+        .productCommonDet{
+            /* display: flex; */
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            padding: 10px;
+            background-color: #fff;
+            gap: 5px;
+        }
+        .productImg{
+            width: 200px;
+            height: 200px;
+        }
+        .sellerManue{
+            padding: 5px;
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            width: 200px;
+        }
+        .manueOptions{
+            font-size: 1.2em;
+            min-width: 1.7em;
+            padding-left: 10px;
+            margin: 5px;
+        }
+        .productDet{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .productInput{
+            border: .1em solid gray;
+            margin: 5px;
+            margin-left: 20px;
+            min-height: 2em;
+            min-width: 50em;
+        }
+        .productDesc{
+            padding: 5px;
+        }
+        .others_options_managed{
+            display: grid;
+            justify-content: center;
+            gap: 10px;
+        }
+        .productAboutOptions{
+            width: 30rem;
+            display: grid;
+            justify-content: center;
+            align-items: center;
+            background-color: #fff;
+            margin: 1.5rem;
+        }
+        .clothes_shows-items{
+            display: grid;
+            grid-template-columns: 1fr 3fr;
+            margin: .5rem;
+        }
+        .clothes_shows-items > input {
+            border: .1em solid gray;
+            margin: 5px;
+            margin-left: 20px;
+            min-height: 2em;
+            min-width: 25em;
+            border-radius: 3px;
+        }
+        .productOptional{
+            margin: 10px;
+        }
+        .manueOptions:hover{
+            background-color: rgb(218, 210, 210);
+        }
+        .productAboutOptions{
+            display: none;
+        }
+        .sellerContents{
+            align-items: center;
+            justify-content: center;
+            display: flex;
+            flex-direction: column;
+        }
+        .submit{
+            border: 1px solid gray;
+            padding: .5rem;
+            padding-inline: 1rem;
+            background-color: rgb(188, 190, 196);
+            font-weight: bold;
+            border-radius: 5px;
+        }
+    {%endblock style%}
+{% block content %}
+
+    {% if s_data %}
+        <div class="seller_uplode">
+            <div class="sellerManue"></div>
+            <div class="sellerManue" style="position: fixed;">
+                <div class="manueOptions Clothes">Clothes</div>
+                <div class="manueOptions Shows">Shows</div>
+                <div class="manueOptions mobile">mobile</div>
+                <div class="manueOptions Laptop">Laptop</div>
+                <div class="manueOptions Gagets">Gagets</div>
+                <div class="manueOptions Toys">Toys</div>
+            </div>
+            <form action="" method="post">
+                {% csrf_token %}
+                <div class="sellerContents">
+                    <div class="productCommonDet">
+                        <div class="productImg">
+                            <input type="file" id="imageInput" name="inp_img" accept="image/*" onchange="previewImage(event)" class="productImg_path">
+                            <label for="">Enter the path of the image</label>
+                            <input type="text" name="image" class="changeVal"> <!-- style="display: none;" -->
+                            <img id="imagePreview" src="#" alt="Selected Image" style="display: none;max-height: 200px; max-width: 200px; overflow: hidden;">
+
+
+                            <script>
+                                inputData = document.querySelector('.productImg_path')
+                                changeVal = document.querySelector('.changeVal')
+                                inputData.addEventListener('change',()=>{
+                                console.log(inputData.value)
+                                changeVal.value=inputData.value
+
+                                img = document.querySelector('#imagePreview');
+                                inputData.addEventListener('change', function (event) {
+                                    console.log(inputData.value)
+                                    var reader = new FileReader();
+
+                                    reader.onload = function (e) {
+                                        document.getElementById('img').src = e.target.result;
+                                    };
+
+                                    reader.readAsDataURL(event.target.files[0]);
+                                    console.log(reader)
+                                });
+
+
+                            })
+                            </script>
+                        </div>
+                        <div class="productDet">
+                            <div class="productName"><input name="name" class="productInput" type="text" placeholder="    Enter the name of product"></div>
+                            <div class="productPrice"><input name="price" class="productInput" type="number" name="" id="" placeholder="     Enter the price of product"> </div>
+                            <div class="productDiscreption"><textarea name="descreption" class="productInput productDesc" name="" id="" cols="30" rows="1" placeholder="     Enter Keywords or descreption"></textarea></div>
+                        </div>
+                    </div>
+                    <div class="productOptional">
+        
+        
+                        <div class="others_options_managed">
+                                        <!-- color,brand,size,faeric,desine,paterns,type,model , for whom ,waight -->
+                            <div class="productAboutOptions Clothes-o Shows-o">
+                                <div class="clothes_shows-items clothes_shows1">
+                                    <label for="">Color : </label> 
+                                    <input name="color" type="text" class="clothes_shows_input" placeholder="  Enter Color">        
+                                </div>
+                                <div class="clothes_shows-items clothes_shows2">
+                                    <label for="">Brand : </label> 
+                                    <input type="text" name="brand" class="clothes_shows_input" placeholder="  Enter brand Name">        
+                                </div>
+                                <div class="clothes_shows-items clothes_shows3">
+                                    <label for="">Size : </label> 
+                                    <input name="size" type="text" class="clothes_shows_input" placeholder="  Enter Size with paramitter">        
+                                </div>
+                                <div class="clothes_shows-items clothes_shows4">
+                                    <label for="">Faberic : </label> 
+                                    <input name="faeric" type="text" class="clothes_shows_input" placeholder="  Enter Faberic Name">        
+                                </div>
+                                <div class="clothes_shows-items clothes_shows5">
+                                    <label for="">Desine : </label> 
+                                    <input name="desine" type="text" class="clothes_shows_input" placeholder="  Enter Desine">        
+                                </div>
+                                <div class="clothes_shows-items clothes_shows6">
+                                    <label for="">Patens : </label> 
+                                    <input name="paterns" type="text" class="clothes_shows_input" placeholder="  Enter Patens">        
+                                </div>
+                                <div class="clothes_shows-items clothes_shows7">
+                                    <label for="">Type : </label> 
+                                    <input name="type" type="text" class="clothes_shows_input" placeholder="Type">        
+                                </div>
+                                <div class="clothes_shows-items clothes_shows8">
+                                    <label for="">Model : </label> 
+                                    <input name="model" type="text" class="clothes_shows_input" placeholder="  Enter Model Name">        
+                                </div>
+                                <div class="clothes_shows-items clothes_shows9">
+                                    <label for="">User : </label> 
+                                    <Select name="User">
+                                        <option value="Man">Man/boys</option>
+                                        <option value="woman">woman/girls</option>
+                                        <option value="others">others</option>
+                                    </Select>        
+                                </div>
+                                <div class="clothes_shows-items clothes_shows10">
+                                    <label for="">waight : </label> 
+                                    <input name="waight" type="text" class="clothes_shows_input" placeholder="  Enter Waight with paramitter">        
+                                </div>
+                            </div>
+                                        <!-- age , waight , charge , size , material , brand , type  -->
+                            <div class="productAboutOptions Toys-o">
+                                <div class="clothes_shows-items clothes_shows1">
+                                    <label for="">User Age : </label>
+                                    <select name="age" id="">
+                                        <option value="0 to 2">0 to 2</option>
+                                        <option value="2 to 5">2 to 5</option>
+                                        <option value="5 to 10">5 to 10</option>
+                                        <option value="10 to 15">10 to 15</option>
+                                    </select>      
+                                </div>
+                                <div class="clothes_shows-items clothes_shows2">
+                                    <label for="">Waight : </label> 
+                                    <input name="Waight" type="text" class="clothes_shows_input" placeholder="  Enter Waight with paramitter">        
+                                </div>
+                                <div class="clothes_shows-items clothes_shows3">
+                                    <label for="">Chargable : </label> 
+                                    <input name="Chargable" type="checkbox" class="clothes_shows_input" placeholder="  Enter Size with paramitter">        
+                                </div>
+                                <div class="clothes_shows-items clothes_shows4">
+                                    <label for="">Size : </label> 
+                                    <input name="Size" type="text" class="clothes_shows_input" placeholder="  Enter Size with paramitter">        
+                                </div>
+                                <div class="clothes_shows-items clothes_shows5">
+                                    <label for="">material : </label> 
+                                    <input name="material" type="text" class="clothes_shows_input" placeholder="  Enter material name">        
+                                </div>
+                                <div class="clothes_shows-items clothes_shows6">
+                                    <label for="">Brand : </label> 
+                                    <input name="Brand" type="text" class="clothes_shows_input" placeholder="  Enter Brand name">        
+                                </div>
+                                <div class="clothes_shows-items clothes_shows7">
+                                    <label for="">Type : </label> 
+                                    <input name="Type" type="text" class="clothes_shows_input" placeholder="Type">        
+                                </div>
+                                <div class="clothes_shows-items clothes_shows8">
+                                    <label for="">Model : </label> 
+                                    <input name="Model" type="text" class="clothes_shows_input" placeholder="  Enter Model Name">        
+                                </div>
+                                <div class="clothes_shows-items clothes_shows9">
+                                    <label for="">User : </label> 
+                                    <select name="User" id="">
+                                        <option value="Man">Man/boys</option>
+                                        <option value="woman">woman/girls</option>
+                                        <option value="others">others</option>
+                                    </Select>        
+                                </div>
+                            </div>
+                                        <!-- display size , display , battery , network , brand , ram & rom , waight,camera,procacers,warrenty,model number,color,sim slort,wifi , batery type,grafic , charging -->
+                            <div class="productAboutOptions mobile-o Laptop-o">
+                                <div class="clothes_shows-items clothes_shows2">
+                                    <label for="">display size : </label> 
+                                    <input name="display_size" type="text" class="clothes_shows_input" placeholder="  Enter display size with paramitter">        
+                                </div>
+                                <div class="clothes_shows-items clothes_shows3">
+                                    <label for="">display : </label> 
+                                    <input name="display" type="text" class="clothes_shows_input" placeholder="  describe about display">        
+                                </div>
+                                <div class="clothes_shows-items clothes_shows4">
+                                    <label for="">battery : </label> 
+                                    <input name="battery" type="text" class="clothes_shows_input" placeholder="  Enter Size of battery">        
+                                </div>
+                                <div class="clothes_shows-items clothes_shows1">
+                                    <label for="">Network : </label>
+                                    <select name="network" id="">
+                                        <option value="5g">5g</option>
+                                        <option value="4g">4g</option>
+                                        <option value="3g">3g</option>
+                                        <option value="2g">2g</option>
+                                    </select>      
+                                </div>
+                                <div class="clothes_shows-items clothes_shows5">
+                                    <label for="">Brand : </label> 
+                                    <input name="brand" type="text" class="clothes_shows_input" placeholder="  Enter Brand name">        
+                                </div>
+                                <div class="clothes_shows-items clothes_shows6">
+                                    <label for="">ram & rom : </label> 
+                                    <input name="ram&rom" type="text" class="clothes_shows_input" placeholder="  Enter size of ram & rom">        
+                                </div>
+                                <div class="clothes_shows-items clothes_shows7">
+                                    <label for="">waight : </label> 
+                                    <input name="waight" type="text" class="clothes_shows_input" placeholder="Enter waight with paramitter">        
+                                </div>
+                                <div class="clothes_shows-items clothes_shows8">
+                                    <label for="">Camera : </label> 
+                                    <input name="camera" type="text" class="clothes_shows_input" placeholder="  Enter all about Camera">        
+                                </div>
+                                <div class="clothes_shows-items clothes_shows8">
+                                    <label for="">procacers : </label> 
+                                    <input name="procacers" type="text" class="clothes_shows_input" placeholder="  Enter procacers name">        
+                                </div>
+                                <div class="clothes_shows-items clothes_shows8">
+                                    <label for="">warrenty : </label> 
+                                    <input name="warrenty" type="text" class="clothes_shows_input" placeholder="  warrenty time preord">        
+                                </div>
+                                <div class="clothes_shows-items clothes_shows8">
+                                    <label for="">model number : </label> 
+                                    <input name="modelnumber" type="text" class="clothes_shows_input" placeholder="  Enter model number">        
+                                </div>
+                                <div class="clothes_shows-items clothes_shows8">
+                                    <label for="">color : </label> 
+                                    <input name="color" type="text" class="clothes_shows_input" placeholder="  Enter color">        
+                                </div>
+                                <div class="clothes_shows-items clothes_shows8">
+                                    <label for="">sim slort : </label> 
+                                    <input name="simslort" type="text" class="clothes_shows_input" placeholder="  Enter how mach sim slot">        
+                                </div>
+                                <div class="clothes_shows-items clothes_shows8">
+                                    <label for="">Wifi : </label> 
+                                    <input name="wifi" type="text" class="clothes_shows_input" placeholder="  Enter about Wifi">        
+                                </div>
+                                <div class="clothes_shows-items clothes_shows8">
+                                    <label for="">batery type : </label> 
+                                    <input name="baterytype" type="text" class="clothes_shows_input" placeholder="  Enter batery type">        
+                                </div>
+                                <div class="clothes_shows-items clothes_shows8">
+                                    <label for="">Grafic card : </label> 
+                                    <input name="grafic" type="text" class="clothes_shows_input" placeholder="  Enter about grafic">        
+                                </div>
+                                <div class="clothes_shows-items clothes_shows8">
+                                    <label for="">Charging : </label> 
+                                    <input name="charging" type="text" class="clothes_shows_input" placeholder="  Enter Charging watte">        
+                                </div>
+                                
+                            </div>
+                            
+                                        <!-- size  , battery , wireless connection , brand , waight  ,warrenty, model number ,color, batery type , type , charging   -->
+                            <div class="productAboutOptions Gagets-o">
+                                <div class="clothes_shows-items clothes_shows4">
+                                    <label for="">battery present : </label> 
+                                    <input name="batterypresent" type="checkbox" class="clothes_shows_input" placeholder="  Enter Size of battery">        
+                                </div>
+                                <div class="clothes_shows-items clothes_shows8">
+                                    <label for="">Chargable :</label> 
+                                    <input name="Chargable" type="checkbox" class="clothes_shows_input" placeholder="  Enter Charging watte">        
+                                </div>
+                                <div class="clothes_shows-items clothes_shows5">
+                                    <label for="">Brand : </label> 
+                                    <input name="Brand" type="text" class="clothes_shows_input" placeholder="  Enter Brand name">        
+                                </div>
+                                <div class="clothes_shows-items clothes_shows7">
+                                    <label for="">waight : </label> 
+                                    <input name="waight" type="text" class="clothes_shows_input" placeholder="Enter waight with paramitter">        
+                                </div>
+                                <div class="clothes_shows-items clothes_shows8">
+                                    <label for="">model number : </label> 
+                                    <input name="modelnumber" type="text" class="clothes_shows_input" placeholder="  Enter model number">        
+                                </div>
+                                <div class="clothes_shows-items clothes_shows8">
+                                    <label for="">color : </label> 
+                                    <input name="color" type="text" class="clothes_shows_input" placeholder="  Enter color">        
+                                </div>
+                                <div class="clothes_shows-items clothes_shows8">
+                                    <label for="">wireless connection  : </label> 
+                                    <input name="wirelessconnection" type="text" class="clothes_shows_input" placeholder="  Enter wireless connection method">        
+                                </div>
+                                <div class="clothes_shows-items clothes_shows8">
+                                    <label for="">batery type : </label> 
+                                    <input name="baterytype" type="text" class="clothes_shows_input" placeholder="  Enter batery type">        
+                                </div>
+                            </div>
+                        </div>
+        
+        
+                    </div>
+                    <input type="text" name="hidden_data" class="hidden" style="display: none;">
+                    <input type="submit" value="Submit" class="submit">
+                </div>
+            </form>
+        </div>
+    {% else %}
+        no s_data found
+        <div></div>
+        <a href="{% url 'Seller:Seller_login'%}">Try to login</a>
+        <div></div>
+        <a href="{% url 'Seller:sellerHome'%}">Go to home</a>
+    {%endif%}
+<div>
+    <!-- {{data}}abc{{data.Name}}ok
+    {{data.main_id}} -->
+</div>
+
+
+    <script>
+        // for image preview
+        function previewImage(event) {
+            var imagePreview = document.getElementById('imagePreview');
+            imagePreview.style.display = 'block';
+            imagePreview.src = URL.createObjectURL(event.target.files[0]);
+        }
+
+        // for manage all options and related input places
+        let option = document.querySelectorAll('.manueOptions')
+        document.querySelector(".submit").style.display = "none"
+
+        console.log(option)
+        option.forEach((opt)=>{
+            opt.addEventListener('click' , ()=>{
+                let selectedOpt = opt.innerHTML;
+                console.log(opt.innerHTML +" clicked ");
+                document.querySelector('.hidden').value = selectedOpt;
+                option.forEach((op)=>{document.querySelector("."+op.innerHTML+'-o').style.display='none'})
+                document.querySelector("."+selectedOpt+"-o").style.display = "contents"
+                document.querySelector(".submit").style.display = ""
+            })
+        })
+    </script>
+{% endblock %}

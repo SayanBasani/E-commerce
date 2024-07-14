@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Successful</title>
+    <style>
+        /* Add your CSS styles here */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            max-width: 500px;
+            padding: 40px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            font-size: 32px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .upload-icon {
+            margin-bottom: 30px;
+        }
+
+        .upload-text {
+            font-size: 18px;
+            color: #555;
+            margin-bottom: 40px;
+        }
+
+        .product-details {
+            text-align: left;
+            margin-bottom: 20px;
+            align-items: center;
+            display: flex;
+            justify-content: center;
+        }
+
+        .product-details p {
+            margin: 5px 0;
+        }
+
+        .back-to-home {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: #4CAF50;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: background-color 0.3s;
+        }
+
+        .back-to-home:hover {
+            background-color: #45a049;
+        }
+
+        .upload-illustration {
+            width: 100%;
+            max-width: 350px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="upload-icon">
+        <img class="upload-illustration" src="data:image/jpeg;base64,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" alt="Upload Illustration">
+    </div>
+
+    <h1>Upload Successful!</h1>
+
+    <p class="upload-text">Your product has been successfully uploaded.</p>
+
+    <div class="product-details">
+        <p><strong>Name:</strong> {{Name}}</p>
+        <p><strong>Price:</strong> {{ product_id }}</p>
+        <!-- <p><strong>Description:</strong> {{ product.description }}</p> -->
+        <!-- Add more product details here as needed -->
+    </div>
+
+    <p>Thank you for adding your product to our platform.</p>
+    <a href="{% url 'Seller:sellerHome' %}" class="back-to-home">Go back to the homepage</a>
+
+</div>
+</body>
+</html>

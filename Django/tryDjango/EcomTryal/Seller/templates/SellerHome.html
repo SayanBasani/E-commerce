@@ -1,0 +1,178 @@
+{%extends 'nav.html' %}
+{% block title %}Seller Home{% endblock %}
+    <!-- <link rel="stylesheet" href="Seller.css"> -->
+    {% block style %}
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            border-style: none;
+        }
+        .seller_home{
+            display: grid;
+            grid-template-columns: 250px 1fr 300px;
+        }
+
+        .Seller_Home , .seller_Home-2{
+            display: grid;
+            margin: 12px;
+        }
+        .seller_home-1{
+            width: 250px;
+        }
+        .seller_home-3{
+            width: 300px;
+        }
+        .Seller-opt{
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+        .seller_btn{
+            margin: 5px;
+            height: 100px;
+        }
+        .any28_div{
+            height: 400px;
+            margin: 10px;
+            border-radius: 5px;
+            width: 33%;
+        }
+        .analytis28{
+            display: flex;
+        }
+        .any28_div{
+            padding: 10px;
+        }
+        .lastOne28DayDitels-Heading{
+            padding: 5px;
+        }
+        .lastProductImgName{
+            border-bottom: 1.5px solid rgb(187, 180, 180);
+            padding-bottom: 5px;
+            display: flex;
+            flex-direction: column;
+            padding-inline: 10px;
+            gap: 5px;
+        }
+        .lastProductImgName-img{
+            width: 200px;
+            border-radius: 5px;
+        }
+        .lastProductImgName-name{
+            margin-bottom: 5px;
+        }
+        .lastProductReiew > *:nth-child(1){
+            text-decoration: none;
+            color: rgb(109, 107, 104);
+            font-size: 16px;
+        }
+        .lastProductReiew,.lastProdDeti-go{
+            margin-bottom: 10px;
+        }
+        .lastProdDeti-go>*:nth-child(1){
+            text-decoration: none;
+            font-size: 20px;
+            margin: 15px;
+        }
+
+        /* second 28 anylitic */
+        .total28Ditels{
+            padding: 20px;
+        }
+        .total28ditels-2{
+            padding: 10px;
+            display: grid;
+        }
+        .SelledItemsNum{
+            font-size: 40px;
+        }
+        .buy-text{
+            display: inline-block;
+            width: 200px;
+        }
+        .buy-number{
+            display: inline-block;
+        }
+        .summery > *:nth-child(5){
+            display: inline-block;
+            width: 200px;
+        }
+        .summery > *:nth-child(6){
+            display: inline-block;
+        }
+        .uplod{
+            display: grid;
+            justify-content: center;
+            align-items: center;
+            background-color:white;
+        }
+
+    {% endblock style%}
+{% block content %}
+
+    <div class="seller_home">
+        <div class="seller_home-1"></div>
+        <div class="Seller_Home" style="background-color: rgb(175, 192, 187);">
+            <!-- <div id="seller_home"> -->
+                <div class="seller_Home-2">
+                    <div class="Seller-opt aboutAllProduct">
+                        <button class="seller_btn allProductGrouth">Analytics</button>
+                        <button class="seller_btn allProduct">All Product</button>
+                    </div>
+                    <!-- <a href="{% url 'Seller:sellerUplod' %}?data={{data}}" class="seller_btn  uplod">Uplod</a> -->
+                    <!-- <a href="{% url 'Seller:sellerUplod' %}?email={{data.Email}}" class="seller_btn  uplod">Uplod</a> -->
+                    <!-- <a href="{% url 'Seller:sellerUplod' %}?i={{data.main_id}}&email={{data.Email}}" class="seller_btn  uplod">Uplod</a> -->
+                    <a href="{% url 'Seller:sellerUplod' %}" class="seller_btn  uplod">Uplod</a>
+                    <div class="Seller-opt aboutFewProduct">
+                        <button class="seller_btn last2ProdGroth">Last 2 product</button>
+                        <button class="seller_btn last2Prod">Total Sells</button>
+                    </div>
+                </div>
+                <!-- </div> -->
+                <div class="Seller-opt analytis28" style="background-color: aliceblue;">
+                    <div class="any28_div lastOne28DayDitels" style="background-color: rgb(226, 218, 204); ">
+                    <!-- last 28 day analisis based on one last product -->
+                    <h3 class="lastOne28DayDitels-Heading">Latest product performance</h3>
+                    <div class="lastProdDeti lastProductImgName">
+                        <img class="lastProductImgName-img" src="image.png" alt="Product">
+                        <p class="lastProductImgName-name">xyz product</p>
+                    </div>
+                    <div class="lastProdDeti lastProductReiew">
+                        <a href="">4.5 Rating & 4,500 Reviews</a>
+                    </div> 
+                    <div  class="lastProdDeti lastProdDeti-go analisis anal_btn" style=" border-radius: 3px; background-color: rgb(151, 138, 123); ">
+                        <a href="" style="color: rgb(45, 43, 43); ">Go to Analytics</a>
+                    </div>               
+                    <div class="lastProdDeti lastProdDeti-go Reviews" style=" border-radius: 3px; background-color: rgb(151, 138, 123); ">
+                        <a href="" class="ReviewsBtn" style="color: rgb(53, 51, 51);">Go to Reviews</a>
+                    </div>
+                    <div class=""></div>
+                    <div class=""></div>
+                    <div class=""></div>
+                </div>
+                <div class="any28_div total28Ditels" style="background-color: rgb(226, 218, 204); ">
+                    <!-- last 28 day analisis based on hole channel -->
+                    <h3 class="total28ditels-1">Sells analytics</h3>
+                    <div class="total28ditels-2">
+                        <h5>Total Sell items(pic)</h5>
+                        <p class="SelledItemsNum">500</p>
+                    </div>
+                    <div class="total28ditels-3 summery">
+                        <h3>Summary</h3>
+                        <p>Last 28 Days</p>
+                        <div class="buy-text">Buy</div>
+                        <div class="buy-number">40</div>
+                        <div class="amount-text">Amount</div>
+                        <div class="amount-number">4000 R.s</div>
+                    </div>
+                    <div class="total28ditels-4"></div>
+                    <div class="total28ditels-5"></div>
+                    <div class="total28ditels-6"></div>
+                </div>
+    
+            </div>
+            <a href="{% url 'Seller:logout' %}" style="border-style: none; cursor: pointer;height: 2rem;background-color: rgb(207, 233, 233); border-bottom: .5px solid gray;margin-inline: 25%; display: flex; justify-content: center;align-items: center;">log out</a>
+        </div>
+        <div class="seller_home-3"></div>
+    </div>
+{% endblock content %}

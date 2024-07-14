@@ -1,0 +1,150 @@
+{% extends "nav.html"%}
+{% block title %}Product List{% endblock %}
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    {%block style%}
+            .navBody{
+                background-color:#008eff;
+            }
+            *{
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                font-family: "Hind", sans-serif;
+                font-weight: 400;
+                font-style: normal;
+                /* overflow: hidden; */
+            }
+            a,select{
+                text-decoration: none;
+            }
+            select{
+                border:1px solid rgb(190, 188, 188);
+            }
+            div{
+                margin: 1px;
+                padding: 1px;
+                /* border: 1px solid black; */
+            }
+            body{
+                background-color: rgb(224, 225, 225);
+            }
+            h3{
+                font-weight: 600;
+                margin-bottom: 1rem;
+            }
+            .product_list_content{
+                padding: 10px;
+            }
+            .serch_options{
+                position: fixed;
+                display: grid;
+                text-align: center;
+                gap: 1rem;
+                padding: 1rem;
+                width: 15rem;
+                justify-content: center;
+                padding: .5rem;
+                display: grid;
+                background-color: white;
+                margin-top: 1rem;
+            }
+            .serch_options-empty{
+                width: 15rem;
+            }
+            .onclickSortBy{
+                border-radius: 5px;
+                background-color: white;
+                top: 10px;
+                overflow: hidden;
+                display: grid;
+                gap: .5rem;
+                justify-content: center;
+                text-align: center;
+                height: 2rem;
+                margin-bottom: 1rem;
+                /* display: none; */
+            }
+            .filterOptions{
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+            }
+            .filteropt:hover {
+                color: blue;
+
+            }
+            .product_list_content{
+                display: grid;
+                grid-template-columns: 17rem 1fr;
+            }
+            .productDitels{
+                margin: 1rem;
+                display: grid;
+                grid-template-columns: auto 1fr;
+                /* grid-template-columns: 200px 1fr; */
+                gap: 2rem;
+                background-color: white;
+            }
+            .productName{
+                font-weight : 600;
+                font-size: 20px;
+            }
+            .productData{
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                padding: 40px;
+                padding-inline: 0px;
+                gap: 15%;
+            }
+
+    {% endblock %}
+<!-- </head>
+<body> -->
+{%block content %}
+    <div class="product_list_content">
+        
+        <div class="serch_options-empty"></div>
+        <div class="serch_options">
+            <div class="serch_option sortBy">
+                <h3>Sort By</h3>
+                <!-- sort options  -->
+                <select class="onclickSortBy">
+                    <option class="onclickSortBy_ops">Relevance</option>
+                    <option class="onclickSortBy_ops">Popularity</option>
+                    <option class="onclickSortBy_ops">Price -- Low to High</option>
+                    <option class="onclickSortBy_ops">Price -- High to Low</option>
+                    <option class="onclickSortBy_ops">Newest First</option>
+                </select>
+            </div>
+
+
+            <div class="serch_option filter">
+                <h3>Filter</h3>
+                <div class="filterOptions">
+                    <!-- color,brand,size,faeric,desine,paterns,type,model , for whom ,waight -->
+                    <a class="filteropt">op1</a>
+                </div>
+            </div>
+        </div>
+        
+
+        <div class="productsArange">
+            {%for product in products%}
+            <div class="productDitels">
+                <div class="productImg">
+                    <img src="" alt="" width="200px" height="200px" loading="lazy">
+                </div>
+                <div class="productData">
+                    <div class="productName">{{product.Name}}</div>
+                    <div class="productPrice">{{product.price}}</div>
+                    <div class="productReating">{{product.option}}</div>
+                </div>
+            </div>
+            {%endfor%}
+
+        </div>
+    </div>
+    {%endblock%}
+<!-- </body>
+</html> -->

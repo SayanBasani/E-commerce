@@ -1,0 +1,195 @@
+body{
+    /* background-color: #524141; */
+    /* height: 10000px; */
+}
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+/* ------------- first nav css ---------------------- */
+.nav1{
+    /* width: 100%; */
+    height: 85px;
+    background-color: rgb(78, 7, 117);
+    right: 0;
+    display: flex;
+    justify-content: space-around;
+    color: white;
+    font-size: 20px;
+}
+.line3{
+    padding-left: 10px;
+    display: flex;
+    align-items: center;
+    /* border: 3px solid; */
+}
+.nav1_item{
+    /* border: 3px solid; */
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    width: 100%;
+}
+
+.nav1_item:hover{
+    background-color: rgb(250, 248, 252);
+    color: rgb(78, 7, 117);
+    border-radius: 8px;
+}
+.nav1_search{
+    width: 500px;
+    /* width: 500px; */
+    height: 30px;
+    border-radius: 10px;
+    flex-wrap: wrap;
+    flex-shrink: 1000;
+}
+#nav1_1{
+    border-radius: 3px;
+}
+.nav1_login{
+    border-radius: 2px;
+    border-style: hidden;
+    background: rgb(86, 11, 127);
+    color: white;
+    /* border: 1px solid; */
+    height: 25px;
+}
+.nav1_login:hover{
+    background-color: white;
+    color: rgb(78, 7, 117);
+}
+
+
+
+/* -------------- second nav -------------------- */
+.nav2{
+    display: flex;
+    background-color: rgb(92, 19, 131);
+    height: 35px;
+    justify-content: space-around;
+    /* border: 2px solid rgb(0, 0, 0); */
+
+}
+.nav2_item{
+    align-self: center;
+}
+.nav2_button{
+    background-color: transparent;
+    border-style: hidden;
+    padding: 8px;
+    color: white;
+
+}
+.nav2_button:hover{
+    /* border: 2px solid white; */
+}
+/* ------------- for side slide nave bar ---------------- */
+body{
+    font-family: "Lato", sans-serif;
+}
+.sidenav{
+    width: 0;
+    background-color: #111;
+    height: 100%;
+    position: fixed;
+    z-index: 1;
+    overflow: hidden;
+    padding-top: 60px;
+    transition: 0.5s;
+    top: 0;
+    left: 0;
+}
+.sidenav_option{
+    padding: 8px 8px 32px;
+    font-size: 25px;
+    display: block;
+    transition: 0.3s;
+}
+.sidenav .closebutton{
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 30px;
+    margin-top: 25px;
+}
+.sidenav a:hover {
+    color: #f1f1f1;
+  }
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ----------------- banner of the home page -----------------*/
+.home_banner{
+    /* border: 20px solid black; */
+}
+.home_banner_image_1{
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    z-index: -1;
+    position: absolute;
+}
+/* ----------------- offer items of the home page -----------------*/
+    
+.offers{
+    /* border: 2px solid; */
+    /* height: 200px; */
+    display: grid;
+    grid: auto-flow dense / 32% 32% 32%;
+    padding-top: 17%;
+    margin: 2%;
+    gap: 2%;
+}
+.items-offers{
+    /* border: 2px solid black; */
+    /* height:33px; */
+    display: grid;
+    grid-template-columns: 100% ;
+    grid-template-columns: 50% 50%;
+    grid-template-areas: 
+    'header header '
+    ;
+    background-color: aliceblue;
+}
+.items-offers-element{
+    margin: 5%;
+    height: auto;
+    /* border: 2px solid black; */
+}
+.items-offers-element_img{
+    width: 100%;
+}
+.items-offers-element_name{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 12px;
+}
+.items-offers_intro{
+    grid-area: header;
+    /* border: 2px solid black; */
+    padding: 2px;
+    font-size: 21px;
+    display: flex;
+    flex-wrap: nowrap;
+}
+.items-offers_intro-p{
+
+}

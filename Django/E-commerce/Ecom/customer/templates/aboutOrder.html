@@ -1,0 +1,112 @@
+{% extends "nav.html"%}
+{%block style%}
+{% endblock %}
+{%block content %}
+    
+    <div class="Order_Body grid p-3">
+        
+        <div class="order grid gap-3 ">
+            <div class="about_fiew grid grid-flow-col gap-2 bg-white">
+                <div class="img flex justify-center items-center overflow-hidden p-4"><img src="https://img.freepik.com/free-photo/abstract-autumn-beauty-multi-colored-leaf-vein-pattern-generated-by-ai_188544-9871.jpg" alt="" class="max-w-[300px] max-sm:w-[100%]"></div>
+                <div class="grid justify-center items-center">
+                    <div class="sm:h-[40px] mx-sm:h-[25px] max-sm:text-[15px] sm:text-[25px] font-semibold inline-block overflow-x-hidden">Boat HeadPhone Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro, similique.</div>
+                    <div class="material-symbols-outlined h-[40px] max-sm:text-[15px] sm:text-[25px] flex items-center overflow-hidden">2499 currency_rupee</div>
+                </div>
+            </div>
+
+            <div class="order_status ">
+                <!-- <div class=""></div> -->
+                <div class="delevery_state  grid justify-center">
+                    <div class="bg-white px-10 py-3 grid gap-5">
+                        <div class="delivery_status grid max-sm:grid-cols-[1px,40px] sm:grid-cols-2 gap-52 items-center order_confimed">
+                            <div class="max-sm:h-[25px] max-sm:w-[180px]">Order Confimed </div>
+                            <div class="w-5 h-5 bg-green-500"></div>
+                        </div>
+                        <div class="delivery_status grid max-sm:grid-cols-[1px,40px] sm:grid-cols-2 gap-52 items-center shoped">
+                            <div class="max-sm:h-[25px] max-sm:w-[180px]">Shoped</div>
+                            <div class="w-5 h-5 bg-green-500"></div>
+                        </div>
+                        <div class="delivery_status grid max-sm:grid-cols-[1px,40px] sm:grid-cols-2 gap-52 items-center packageing">
+                            <div class="max-sm:h-[25px] max-sm:w-[180px]">Packageing</div>
+                            <div class="w-5 h-5 bg-green-500"></div>
+                        </div>
+                        <div class="delivery_status grid max-sm:grid-cols-[1px,40px] sm:grid-cols-2 gap-52 items-center ready_recive">
+                            <div class="max-sm:h-[25px] max-sm:w-[180px]">please ready to recive </div>
+                            <div class="w-5 h-5 bg-green-500"></div>
+                        </div>
+                        <div class="delivery_status grid max-sm:grid-cols-[1px,40px] sm:grid-cols-2 gap-52 items-center deliverded">
+                            <div class="max-sm:h-[25px] max-sm:w-[180px]">Deliverded </div>
+                            <div class="w-5 h-5 bg-green-500"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            
+
+            <div class="onhover_order_status absolute bg-slate-300 font-[29px] p-3 hidden overflow-hidden rounded-lg">
+                <div class="delivery_status_onhover order_confimed_hover hidden">
+                    <div class="order_confimed_hover_complit">
+                        <h4 class="font-bold">Your order is Confimed.</h4>
+                        <span>Time</span>
+                    </div>
+                    <div class="order_confimed_hover_incomplit text-red-600 font-bold">Your order is not Confimed</div>
+                </div>
+                <div class="delivery_status_onhover shoped_hover hidden">
+                    <div class="shoped_hover_complit">
+                        <h4 class="font-bold">Your order is shoped</h4>
+                        <span>Time</span>
+                    </div>
+                    <div class="shoped_hover_incomplit bg-slate-400 text-white p-3">Your order is not shoped.It need little bit more time</div>
+                </div>
+                <div class="delivery_status_onhover packageing_hover hidden">
+                    <div class="packageing_hover_complit">
+                        <h4 class="font-bold">Your order is Packed.</h4>
+                    </div>
+                    <div class="packageing_hover_incomplit"></div>
+                </div>
+                <div class="delivery_status_onhover ready_recive_hover hidden">
+                    <div class="ready_recive_hover_complit">
+                        <h4 class="font-bold">Out for Delivery.</h4>
+                        <span>Time</span>
+                    </div>
+                    <div class="ready_recive_hover_complit"></div>
+                </div>
+                <div class="delivery_status_onhover deliverded_hover hidden">
+                    <div class="deliverded_hover_complit">
+                        <h4 class="font-bold">Delivered</h4>
+                        <span>Time</span>
+                    </div>
+                    <div class="deliverded_hover_incomplit"></div>
+                </div>
+            </div>
+            <script>            <!-- this scripts is for manage hover of the status. -->
+                delivery_status = document.querySelectorAll('.delivery_status')
+                // composit_Style = window.getComputedStyle(delivery_status[0])
+                delivery_status_onhover = document.querySelectorAll('.delivery_status_onhover')
+                onhover_order_status = document.querySelector('.onhover_order_status')
+                delivery_status.forEach((element,index) => {
+                    element.addEventListener('mouseover',()=>{
+                        onhover_order_status.style.display='grid'
+                        delivery_status_onhover[index].style.display='grid'
+                        position_dit = element.getBoundingClientRect()
+                        onhover_order_status.style.width=position_dit.width+'px'
+                        onhover_order_status.style.left=position_dit.x+'px'
+                        onhover_order_status.style.top=(position_dit.y+position_dit.height)+'px'
+                    })
+                });
+                delivery_status.forEach((element,index) => {
+                    element.addEventListener('mouseout',()=>{
+                        // console.log(element)
+                        onhover_order_status.style.display='none'
+                        delivery_status_onhover[index].style.display='none'
+                    })
+                });
+                
+            </script>
+
+
+        </div>
+
+    </div>
+{%endblock%}

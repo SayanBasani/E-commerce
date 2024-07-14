@@ -1,0 +1,10 @@
+a="sayan"
+b="basani"
+c='123456'
+d=a[::2]+b[::3]+c[::4]
+e={
+    'a':a,'b':b,'c':c,
+}
+print(e)
+e['d']=d
+print(e)

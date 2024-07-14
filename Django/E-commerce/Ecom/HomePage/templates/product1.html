@@ -1,0 +1,178 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>product</title>
+    <link rel="stylesheet" href="product.css"> -->
+    {% extends "nav.html"%}
+    {% block titel %}Product {%endblock%}
+    {% block style %}
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            height: 1000px;
+        }
+        /* add for product */
+        .profile{
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            flex-direction: row;
+            padding: 15px;
+        }
+        .profileDiv{
+            margin: 2px;
+        }
+        .prof_dit_1{
+            position: sticky;
+            top: 10px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* LEFT ditels */
+        /* images add swip-button */
+        .img{
+            display: grid;
+            height: 450px;
+            grid-template-areas: 
+            "a b b b b c"
+            ;
+        }
+        .btn-img{
+            border-style: hidden;
+            font-size: 25px;
+        }
+        /* buy and add to cart */
+        .prof_dit_1{
+            display: flex;
+        }
+        .buy-btn{
+            width: 150px;
+            height: 50px;
+            margin: 3px;
+        }
+        .buy{
+            display: flex;
+            justify-content: center;
+        }
+        /* product ditels */
+        .prodAllDet{
+            padding: 2px;
+        }
+        .prodName{
+            font-size: 24px;
+        }
+        .prodRating{
+            font-size: 18px;
+        }
+        .prodPrice{
+            font-size: 28px;
+        }
+        .offers{
+            display: grid;
+            grid-template-areas: 
+            "a a a"
+            "b c d"
+            ;
+        }
+        .offerBtn{
+            width: 150px;
+            height: 100px;
+            border-style: hidden;
+        }
+        .prodBasicDet{
+            margin: 8px;
+        }
+        .AvailableOffers{
+            grid-area: a;
+        }
+        .partnerOffers_1{
+            grid-area: b;
+        }
+        .partnerOffers_2{
+            grid-area: c;
+        }
+        .offerSpace{
+            grid-area: d;
+        }
+        .offerBtn-head ,.AvailableOffers{
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .hig{
+            margin: 2px;
+            display: flex;
+            font-weight: bold;
+            margin: 8px;
+        }
+        .hig-dtls{
+            font-weight: normal;
+        }
+    {%endblock%}
+
+    {% block content %}  
+    <!-- <h1>{{l_p_data}}</h1> -->
+    <div class="profile">
+        <div class="prof_dit_1 profileDiv">
+            <div class="img">
+                <button class="btn-img btn-l" style="grid-area: a;"><</button>
+                <div class="spaceForImg" style="grid-area: b;">
+                    <img src="{{l_p_data.ProductImg}}" alt="">
+                </div>
+                <button class="btn-img btn-r" style="grid-area: c;">></button>
+            </div>
+            <div class="buy">
+                <button class="buy-btn">ADD TO CART</button>
+                <button class="buy-btn">BUY</button>
+            </div>
+        </div>
+        <div class="prof_dit_2 profileDiv prodAllDet">
+            <p class="prodBasicDet prodName">{{l_p_data.Name}}</p>
+            <p class="prodBasicDet prodRating">4.2*</p>
+            <hr>
+            <div class="prodBasicDet prodPrice">
+                <p class="price">{{l_p_data.price}}</p>
+            </div>
+            <hr>
+            <div class="prodBasicDet offers">
+                <p class="AvailableOffers">Available offers</p>
+                <button class="offerBtn bankOffers_1">
+                    <p class="offerBtn-head">Bank Offers</p>
+                    <p>about offers</p>
+                    <div style="height: 15px;"></div>
+                    <p>Other Offers</p>
+                </button>
+                <button class="offerBtn partnerOffers_2">
+                    <p class="offerBtn-head">Partner Offers</p>
+                    <p>about offers</p>
+                    <div style="height: 15px;"></div>
+                    <p>Other Offers</p>
+                </button>
+                <div class="offerBtn offerSpace"></div>
+                <!-- <button class="partnerOffers"></button> -->
+            </div>
+            <hr>
+            <!-- heilight -->
+            <div class="Highlights">
+                <div class="hig">Brand      :<p class="hig-dtls">{{l_p_data.brand}}</p></div>
+                <div class="hig">Name       :<p class="hig-dtls">{{l_p_data.Name}}</p></div>
+                <div class="hig">Model      :<p class="hig-dtls">{{l_p_data.modelnumber}}</p></div>
+                <div class="hig">Colour     :<p class="hig-dtls">{{l_p_data.color}}</p></div>
+                <div class="hig">Meterial   :<p class="hig-dtls"></p></div>
+            </div>
+            <hr>
+            <div class="specifictions">
+                <h3 class="spec-heding">About this item</h3>
+                <div class="specAllText">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    {%endblock%}
+/* </body>
+</html> */
