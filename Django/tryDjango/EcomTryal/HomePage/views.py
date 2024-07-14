@@ -14,7 +14,7 @@ firebaseConfig = {
     "measurementId": "G-9FHK9WTB15",
     'databaseURL':" ",
 }
-service={
+eservice={
   "type": "service_account",
   "project_id": "ecomm3-254e9",
   "private_key_id": "a0983cfd42c4ad6ac676ca98a635b011239fb266",
@@ -32,7 +32,7 @@ firebase=pyrebase.initialize_app(firebaseConfig)
 auth = firebase.auth()
 if not firebase_admin._apps:
     print("firebase_admin.initialize_app(cred) have to ineasealize ")
-    cred = credentials.Certificate(service)
+    cred = credentials.Certificate(eservice)
     firebase_admin.initialize_app(cred)
 database = firestore.client()
 # print(auth)

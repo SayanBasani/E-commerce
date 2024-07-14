@@ -17,7 +17,7 @@ firebaseConfig = {
 }
 firebase = pyrebase.initialize_app(firebaseConfig)
 auth = firebase.auth()
-service={
+eservice={
   "type": "service_account",
   "project_id": "ecomm3-254e9",
   "private_key_id": "a0983cfd42c4ad6ac676ca98a635b011239fb266",
@@ -31,7 +31,7 @@ service={
   "universe_domain": "googleapis.com"
 }
 
-cred=credentials.Certificate(service)
+cred=credentials.Certificate(eservice)
 if not firebase_admin._apps:
     firebase_admin.initialize_app(cred)
 database = firestore.client()
