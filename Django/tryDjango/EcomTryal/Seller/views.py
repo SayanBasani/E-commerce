@@ -5,31 +5,13 @@ from firebase_admin import credentials , firestore,storage
 import json
 
 firebaseConfig = {
-  "apiKey": "AIzaSyBCFpno1naa_1Thc4BUjt0TV7Uokvqf1W8",
-  "authDomain": "ecomm3-254e9.firebaseapp.com",
-  "projectId": "ecomm3-254e9",
-  "storageBucket": "ecomm3-254e9.appspot.com",
-  "messagingSenderId": "820764794719",
-  "appId": "1:820764794719:web:d1d2ec9cf5709adc21e0ea",
-  "measurementId": "G-QEJ2HNXHQW",
-  "databaseURL":"https://ecomm3-254e9-default-rtdb.europe-west1.firebasedatabase.app/",
-};
+    # firebase config
+}
+eservice={
+    # fire base service.js 
+}
 firebase = pyrebase.initialize_app(firebaseConfig)
 auth = firebase.auth()
-eservice={
-  "type": "service_account",
-  "project_id": "ecomm3-254e9",
-  "private_key_id": "a0983cfd42c4ad6ac676ca98a635b011239fb266",
-  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCynD7o/SMssh0F\nUOxQou2l5hisqeJYUyXvHK8U0mckc9Bv0Vs9p9IW5fla4WMwEENsnRV1W1/1F9GL\nWG/Sv2BLtMDoHtI+ehTWYy8eLolycON5J4/Wlv5TaHd4LT4UXKD8+SfHJ7S8nM6y\nU3r8CMilBgphWH8+CUz0o45cu7/y/76Op7a3VYaat9FeKhZHMKh0v0vpZNvF2PoE\n9vOwd+4xSVcABWgNABcQq2ncrYbibJFywM05aFp6fMVFVDLcc4IpiAMyU0XceImn\nq0NVNQqq7rtDwqBei+lRJ9qoy2ariXFjLnrwucrYdqornpkjKN8syFdpNGehG9Kd\nXRlr7XZ7AgMBAAECggEAQcw7hLtUTO/krwOrutz6rUYBywHeh2lCLT8k5IfKRWyA\n2eCHO0RqqdLYtHkZgChNnmKT+CLMS88Ve779muazg9A3zIsmKqvwpzXssrK0Ibui\noQxI+eWwFWwDrvsDxp6FFAx5ce2XsHAX2SvVv6lAuUJraocegO0OM4VZOaJUySB+\nNpnEDLOAOYeCNPqJu2JOkZnCDfPlE71tpZmKg3+3DYVKSBLUxWIiDCA2m6TrqeHG\nJIZOUZmHoH1F4SxTtzplZiGPK+W59k25VCwlcTmxIjLxYgbLA6ixD1bUgpjngGhm\nnpGX37707oT2kPcTLZ4DPk3f6Q9f6+B4RGYcaLNlEQKBgQDXDE/ZixHAPpEoHkqR\nlERbyw4f7yJW/b3eN4O0NFfrXQVgMhcIzVyjsXR1tNac0c112V2CbQUlKlQxG5/a\n5UzMwmOguqC5a2lIUbt9F+RELhAFaxVLfMtNEq2h1RlHlshfwmim/vceVg8CeroC\nUxMJIc3I0/J4sJiRuP1oqGqWUwKBgQDUn5PHAbUFWCgFa6LsKHDq8+ROMradrrn0\nkcAkrcdcK/EslNnzjqrTfWOxUscs7AjrdMelLvr5O8pPUgGR6w/iHLowAC/G+7Fi\n7bsp+NOAfsyKVzIupsdmSFb/sNksSio75NLdkZll3SlIz85PRjzpU8fxufFN/Isk\nFXQNHIpKOQKBgBUSmciBfi3Oc77wqPH3C3PLRAkRD9ZiavaZjghckLj5lotEnUk5\nhnhr7TOTkuwvCukfcbBUKornyPQ+9r0mdw4hhk27vAAvbFOv3qV1b+LWeK9vPNj2\n050r1WPkU+PV/LCVhlfG6ERKvpHJoOyVY2ojq9ygGESHWYv+Cqb0ye0NAoGABj7N\ns2m8bHTDcC1SMseZUX1qdlWNAaKxOZrSXwFvuqhbxCh3Im1NXTrwo7O/v/UK6geb\nGaIAozN7ZMsO2r9hzw1y9pf6z0hzVGmRNtFlPP/8eA/JnI8vijSTwZzrNB7VkL7O\n5s0xCUnuvYHFGJUCkwPv+oywps7FM4Eh0ITHFxkCgYEAxdBrpvAKRFDIhcsCerOV\nijIOAeqrc9bObxOtdTm8G3RkkP4xj41F1MdJkuu7E31+ih+7zh0iBVqJjFVXrLBw\n0+JbimKNworNqZsVL7KPKIeL6sQRF0RoEs6DLfr3g65iooMvC/HOqU2PWPm5wA50\nFdMtuTjahNlR/vUmqrOnhA0=\n-----END PRIVATE KEY-----\n",
-  "client_email": "firebase-adminsdk-go3oj@ecomm3-254e9.iam.gserviceaccount.com",
-  "client_id": "106062367916651596055",
-  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
-  "token_uri": "https://oauth2.googleapis.com/token",
-  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-go3oj%40ecomm3-254e9.iam.gserviceaccount.com",
-  "universe_domain": "googleapis.com"
-}
-
 cred = credentials.Certificate(eservice)
 if not firebase_admin._apps:
     firebase_admin.initialize_app(cred)
