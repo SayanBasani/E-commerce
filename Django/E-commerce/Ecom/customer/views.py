@@ -3,7 +3,7 @@ import json
 import firebase_admin,pyrebase
 from firebase_admin import credentials , firestore
 from firebase_admin import credentials, initialize_app, storage
-from customer.models import user_singup,addShoppingAddres
+from customer.models import user_singup,ShoppingAddres
 from HomePage.models import cart
 from Seller.models import all_product
 from django.core import serializers
@@ -128,13 +128,13 @@ def Cart(request):
         # newShoppingAddres = addShoppingAddres.objects.create(**newAddress)
         # newShoppingAddres = addShoppingAddres.objects.create(**newAddress)
         # newShoppingAddres
-        newShoppingAddres = addShoppingAddres(**newAddress)
+        newShoppingAddres = ShoppingAddres(**newAddress)
         newShoppingAddres.save()
     except:
         print('No try about add address')
     # print(allCardItemsData)
     if (ReciverName != None):
-        newShoppingAddres = addShoppingAddres.objects.create(**newAddress)
+        newShoppingAddres = ShoppingAddres.objects.create(**newAddress)
 
     print('end..................................')
        

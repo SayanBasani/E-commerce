@@ -10,12 +10,12 @@ class user_singup(models.Model):
 
     # def __str__(self):
     #     return self.Name
-class addShoppingAddres(models.Model):
-    customerId = models.CharField(max_length=30,null=False)
-    ReciverName = models.CharField(max_length=50,null=False)
-    ReciverMobileNo = models.CharField(max_length=30,null=False)
-    state = models.CharField(max_length=30,null=False)
-    city = models.CharField(max_length=30,null=False)
-    pincode = models.CharField(max_length=20,null=False)
-    Home_Rode_Address = models.CharField(max_length=150,null=False)
+class ShoppingAddres(models.Model):
+    customerId =            models.CharField(max_length=50,null=False)
+    ReciverName =           models.CharField(max_length=60,null=False)
+    ReciverMobileNo =       models.CharField(max_length=15,null=False)
+    state =                 models.CharField(max_length=50,null=False)
+    city =                  models.CharField(max_length=50,null=False)
+    pincode =               models.CharField(max_length=10,null=False)
+    Home_Rode_Address =     models.CharField(max_length=150,null=False)
     
