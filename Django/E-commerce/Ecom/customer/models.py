@@ -10,7 +10,7 @@ class user_singup(models.Model):
 
     # def __str__(self):
     #     return self.Name
-class ShoppingAddres(models.Model):
+class shoppingAddres(models.Model):
     customerId =            models.CharField(max_length=50,null=False)
     ReciverName =           models.CharField(max_length=60,null=False)
     ReciverMobileNo =       models.CharField(max_length=15,null=False)
@@ -18,4 +18,5 @@ class ShoppingAddres(models.Model):
     city =                  models.CharField(max_length=50,null=False)
     pincode =               models.CharField(max_length=10,null=False)
     Home_Rode_Address =     models.CharField(max_length=150,null=False)
-    
+    def __str__(self):
+        return f'{self.customerId},{self.ReciverName},{self.ReciverMobileNo},{self.state},{self.city},{self.pincode},{self.Home_Rode_Address}'

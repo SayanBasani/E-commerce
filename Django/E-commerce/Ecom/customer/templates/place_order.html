@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>place order</title>
+    <style>
+        div{
+            /* border: 1px solid;
+            padding: 1px; */
+        }
+    </style>
+</head>
+<body class="bg-[rgb(238,235,235)]">
+    <div class="body grid gap-3">
+
+        <div class="cart_nav bg-white text-[25px] font-medium p-[15px] items-center justify-center">
+            <a href="{% url 'homepage:HomePage'%}" class="back flex gap-3 overflow-hidden items-center ">
+                <span class="material-symbols-outlined">
+                    keyboard_backspace
+                </span>
+                <span class="grid grid-rows-1">
+                    Back Cart
+                </span>
+            </a>
+        </div>
+        <div class="all_products grid justify-center">
+            <div class="about_fiew grid grid-flow-col gap-2 bg-white px-10 my-1 h-[150px]">
+                <a class="img flex justify-center items-center overflow-hidden" href="{% url 'customer:aboutOrder' %}"><img src="https://img.freepik.com/free-photo/abstract-autumn-beauty-multi-colored-leaf-vein-pattern-generated-by-ai_188544-9871.jpg" alt="" class="max-w-[200px] max-sm:w-[100%]"></a>
+                <div class="grid gap-1 items-center">
+                    <a href="{% url 'customer:aboutOrder' %}" class="sm:h-[40px] mx-sm:h-[25px] max-sm:text-[10px] sm:text-[20px] font-semibold overflow-x-hidden">Boat HeadPhone Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro, similique.</a>
+                    <div class="material-symbols-outlined sm:h-[40px] max-sm:text-[15px] sm:text-[20px] flex items-center overflow-hidden">2499 currency_rupee</div>
+                    <div class="status flex items-center gap-5 font-medium">Quentity <input type="number" class="border-black border-[1px] w-6 h-7"></div>
+                </div>
+            </div>
+        </div>
+
+        
+    </div>
+</body>
+</html>

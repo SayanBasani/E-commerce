@@ -161,7 +161,9 @@
                         <div class=" bg-white text-[240x] grid gap-3 m-2 p-3">
                             <select name="" id="" class="select_address bg-gray-300 h-[40px] px-3 text-[18px]">
                                 <option value="000" class="opt000">Select Delivery Details</option>
-                                <option value="1">chatra akhrasal bankura 722206</option>
+                                {% for item in userAddres.values %}
+                                        <option value="{{item.id}}"> {{item.ReciverName}} {{item.ReciverMobileNo}} {{item.Home_Rode_Address}} {{item.pincode}} {{item.city}} {{item.state}}</option>
+                                {% endfor %}
                                 <option value="0" class="addAddress">Add New Address</option>
                             </select>
                             <div class="add_new_address">

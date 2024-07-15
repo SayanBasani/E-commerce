@@ -3,10 +3,11 @@ import json
 import firebase_admin,pyrebase
 from firebase_admin import credentials , firestore
 from firebase_admin import credentials, initialize_app, storage
-from customer.models import user_singup,ShoppingAddres
+from customer.models import user_singup,shoppingAddres
 from HomePage.models import cart
 from Seller.models import all_product
 from django.core import serializers
+from django.forms.models import model_to_dict
 
 field_names = [field.name for field in user_singup._meta.get_fields()]
 # ####### singup
@@ -73,12 +74,8 @@ def Cart(request):
     for i,j in enumerate(userCartData):
         data = serializers.serialize('json',[j])
         dect_data = json.loads(data)[0]
-        # print(dect_data)
         allCardItems[i]=(dect_data['fields'])
-    # print(allCardItems)
-    # print('allCardItems')
     cartDataLen = len(userCartData)
-    # print(f'cart data lenth is {cartDataLen}')
     totalPrice = 0
     allCardItemsData = {}
     for i in allCardItems:
@@ -105,7 +102,7 @@ def Cart(request):
         prices.update({'totalPrice':totalPrice})
     allCardItemsData['price'] = prices
     newAddress = {}
-    try:
+    try: # try to uplode new address 
         print('try to add a new address')
         ReciverName = request.POST.get('ReciverName')
         ReciverMobileNo = request.POST.get('ReciverMobileNo')
@@ -126,19 +123,25 @@ def Cart(request):
         for k in newAddress:
             print(f'{newAddress[k]} --->  {len(newAddress[k])}')
         # newShoppingAddres = addShoppingAddres.objects.create(**newAddress)
-        # newShoppingAddres = addShoppingAddres.objects.create(**newAddress)
-        # newShoppingAddres
-        newShoppingAddres = ShoppingAddres(**newAddress)
+        newShoppingAddres = shoppingAddres(**newAddress)
         newShoppingAddres.save()
     except:
         print('No try about add address')
-    # print(allCardItemsData)
-    if (ReciverName != None):
-        newShoppingAddres = ShoppingAddres.objects.create(**newAddress)
 
+    userAddress = shoppingAddres.objects.filter(customerId = c_data['main_id'])
+    userAddres = {}
+    j=0
+    for i in userAddress:
+        j+=1
+        print(type(i))
+        # userAddress[j] = i
+        print(f'{i}')
+        model_dict = model_to_dict(i)
+        # Store the dictionary in userAddres
+        userAddres[j] = model_dict
     print('end..................................')
-       
-    return render(request , "cart.html",{'cartItems':allCardItemsData})
+    print(userAddres)
+    return render(request , "cart.html",{'cartItems':allCardItemsData ,'userAddres':userAddres})
 
 def allOrders(request):
     return render(request , "allOrders.html")
