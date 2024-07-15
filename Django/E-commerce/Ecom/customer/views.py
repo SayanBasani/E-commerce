@@ -1,9 +1,12 @@
 from django.shortcuts import render,redirect
-import firebase_admin
+import json
 import firebase_admin,pyrebase
 from firebase_admin import credentials , firestore
 from firebase_admin import credentials, initialize_app, storage
-from customer.models import user_singup
+from customer.models import user_singup,addShoppingAddres
+from HomePage.models import cart
+from Seller.models import all_product
+from django.core import serializers
 
 field_names = [field.name for field in user_singup._meta.get_fields()]
 # ####### singup
@@ -32,7 +35,6 @@ def Singup(request):
             print("Account cant't open")
         
     return render(request,'Singup.html')
-############ login
 def user_login(request):
     print("you are in ogin page ")
     c_data = None
@@ -61,53 +63,82 @@ def logOutCustomer(request):
     request.session.flush()
     return redirect('customer:user_login')
 
-def cart(request):
+def Cart(request):
     c_data = request.session.get('c_data')
     c_Email = c_data['Email']
-    userCartData = database.collection('cart').document(c_Email).get().to_dict()
-    # print(f'cart data of {c_Email} is \n{userCartData}')
-    cartDataLen = len(userCartData)
-    print(f'cart data lenth is {cartDataLen}')
+    
+    userCartData = cart.objects.filter(customer_id = c_data['main_id'])
+    print(userCartData)
     allCardItems = {}
-    for i in range (0,cartDataLen):
-        p_id = userCartData[str(i+1)]['productId']
-        print(f'{i}th product id is : {p_id}')
-        CartProductData = database.collection('Products').document(p_id).get().to_dict()
-        # print(f'item {i} --> {CartProductData} \n')
-        allCardItems.update({f'{i}':CartProductData})
-        print(allCardItems)
-        print('\n')
-    return render(request , "cart.html",{'cartItems':allCardItems})
-def product_list1(request):
-    c_data=request.session.get('c_data')
-    # print(c_data)
-    print('you are in produce list -------------------------------------------------------------')
-    search = request.GET.get('search')
-    print(f'User search {search}')
-    docs = database.collection("Products").stream()
-    # print(docs)
-    product = []
-    for doc in docs:
-        p_data = doc.to_dict()
-        for key, value in p_data.items():
-            # print(f'{key} --> {value}')
-            # print(f'{value} ===== {search}\n')
-            if isinstance(value, str) and value.lower() == search.lower():
-            # if value == "5":
-                # print(f"{doc.id} => {doc.to_dict()} \n")
-                print(p_data['Name'])
-                product.append(p_data)
-    print(type(product))
-    # print(product)
-    print('.....................................................')
-    # print(p_data)
-    return render(request , "product_list.html",{'c_data':c_data,'products':product})
+    for i,j in enumerate(userCartData):
+        data = serializers.serialize('json',[j])
+        dect_data = json.loads(data)[0]
+        # print(dect_data)
+        allCardItems[i]=(dect_data['fields'])
+    # print(allCardItems)
+    # print('allCardItems')
+    cartDataLen = len(userCartData)
+    # print(f'cart data lenth is {cartDataLen}')
+    totalPrice = 0
+    allCardItemsData = {}
+    for i in allCardItems:
+        cart_product_id = allCardItems[i]['productId']
+        # print(cart_product_id)
+        product_data = ''
+        product_gr = all_product.objects.filter(product_id = cart_product_id)
+        for key,j in enumerate(product_gr):
+            product_data = serializers.serialize('json',[j])
+            product_data = json.loads(product_data)[0]
+        # print(product_data)
+        # print("\n\n")
+        totalPrice = totalPrice + int(product_data['fields']['price'])
+        allCardItemsData[i] = (product_data['fields'])
+        prices = {
+            'customerId':c_data['main_id'],
+            'totalItem': i+1,
+            'productPrice' : totalPrice,  
+            'discountPrice' : '00',
+            'PackagingFee' : '40',
+            'DeliveryCharge' : '100',
+        }
+        totalPrice = int(prices['totalItem']) + int(prices['productPrice']) + int(prices['PackagingFee']) + int(prices['discountPrice']) + int(prices['DeliveryCharge'])
+        prices.update({'totalPrice':totalPrice})
+    allCardItemsData['price'] = prices
+    newAddress = {}
+    try:
+        print('try to add a new address')
+        ReciverName = request.POST.get('ReciverName')
+        ReciverMobileNo = request.POST.get('ReciverMobileNo')
+        state = request.POST.get('state')
+        city = request.POST.get('city')
+        pincode = request.POST.get('pincode')
+        Home_Rode_Address = request.POST.get('Home_Rode_Address')
+        newAddress = {
+            'customerId':c_data['main_id'],
+            'ReciverName':ReciverName,
+            'ReciverMobileNo':ReciverMobileNo,
+            'state':state,
+            'city':city,
+            'pincode':pincode,
+            'Home_Rode_Address':Home_Rode_Address,
+        }
+        print(newAddress)
+        for k in newAddress:
+            print(f'{newAddress[k]} --->  {len(newAddress[k])}')
+        # newShoppingAddres = addShoppingAddres.objects.create(**newAddress)
+        # newShoppingAddres = addShoppingAddres.objects.create(**newAddress)
+        # newShoppingAddres
+        newShoppingAddres = addShoppingAddres(**newAddress)
+        newShoppingAddres.save()
+    except:
+        print('No try about add address')
+    # print(allCardItemsData)
+    if (ReciverName != None):
+        newShoppingAddres = addShoppingAddres.objects.create(**newAddress)
 
-def uplod(path):
-    storage.child("Images").child('img.png').put(path)
-    url = storage.child("Images").child('img.png').get_url(firebaseConfig['storageBucket'])
-    r_url = str(url)
-    return r_url    
+    print('end..................................')
+       
+    return render(request , "cart.html",{'cartItems':allCardItemsData})
 
 def allOrders(request):
     return render(request , "allOrders.html")

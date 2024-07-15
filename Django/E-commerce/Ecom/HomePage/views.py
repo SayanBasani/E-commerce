@@ -99,18 +99,26 @@ def addToCart(request):
             
             print(f'have to send this cart data is :--->\n{addCart}')
             print(c_data['main_id'])
+            # customer_old_cart = cart.objects.create(**addCart)
             customer_old_cart = cart.objects.filter(customer_id = c_data['main_id'])
+            print('in to part 2 .....................')
+            isPresent=False
             for data_part in customer_old_cart:
                 serialized_data = serializers.serialize('json', [data_part])
                 data = json.loads(serialized_data)[0]['fields']
                 print(data)
                 print(addCart)
                 if(data['productId'] == addCart['productId']):
+                    isPresent = True 
+                    break
                     print('it is not eligable for add into cart')
                 elif(data['productId'] != addCart['productId']):
-                    cart.objects.create(**addCart)
+                    isPresent = False
                     print('it is eligable to add in to cart data')
-                    
+            if (isPresent == False):
+                cart.objects.create(**addCart)
+                print('it is eigable to update the data base')
+
         except:
             print('cart data uplode fail')
             # print("working in part 2 ................./////////////////////.....................")
