@@ -137,6 +137,9 @@
                 <div class="sellerContents">
                     <div class="productCommonDet">
                         <div class="productImg">
+
+                            <input type="file" id="imageInput" name="doc_profile_img" accept="image/*">
+
                             <input type="file" id="imageInput" name="inp_img" accept="image/*" onchange="previewImage(event)" class="productImg_path">
                             <label for="">Enter the path of the image</label>
                             <input type="text" name="image" class="changeVal"> <!-- style="display: none;" -->
@@ -147,10 +150,11 @@
                                 inputData = document.querySelector('.productImg_path')
                                 changeVal = document.querySelector('.changeVal')
                                 inputData.addEventListener('change',()=>{
+                                    img = document.querySelector('#imagePreview');
                                 console.log(inputData.value)
                                 changeVal.value=inputData.value
-
-                                img = document.querySelector('#imagePreview');
+                                
+                                
                                 inputData.addEventListener('change', function (event) {
                                     console.log(inputData.value)
                                     var reader = new FileReader();
@@ -162,7 +166,20 @@
                                     reader.readAsDataURL(event.target.files[0]);
                                     console.log(reader)
                                 });
+                                // 
+                                document.getElementById('imageInput').addEventListener('change', function (event) {
+                                    var reader = new FileReader();
 
+                                    reader.onload = function (e) {
+                                        document.getElementById('uploaded-image').src = e.target.result;
+                                    };
+
+                                    reader.readAsDataURL(event.target.files[0]);
+                                    console.log(reader)
+                                    console.log(reader)
+                                    console.log(reader)
+                                });
+                                // 
 
                             })
                             </script>

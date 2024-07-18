@@ -1,22 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet"href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <script src="https://cdn.tailwindcss.com"></script>
     <title>place order</title>
     <style>
-        div{
+        div {
             /* border: 1px solid;
-            padding: 1px; */
+            padding: 5px;
+            margin: 5px; */
         }
     </style>
 </head>
-<body class="bg-[rgb(238,235,235)]">
-    <div class="body grid gap-3">
 
-        <div class="cart_nav bg-white text-[25px] font-medium p-[15px] items-center justify-center">
+<body class="bg-[rgb(238,235,235)]">
+    <div class="body grid gap-3 m-4 justify-center items-center ">
+
+        <!-- <div class="cart_nav bg-white text-[25px] font-medium p-[15px] items-center justify-center">
             <a href="{% url 'homepage:HomePage'%}" class="back flex gap-3 overflow-hidden items-center ">
                 <span class="material-symbols-outlined">
                     keyboard_backspace
@@ -25,19 +29,133 @@
                     Back Cart
                 </span>
             </a>
+        </div> -->
+        <div
+            class="price_deti_ele heding  bg-white text-[25px] font-medium p-[3px] items-center text-center justify-center">
+            CHECKOUT
         </div>
-        <div class="all_products grid justify-center">
-            <div class="about_fiew grid grid-flow-col gap-2 bg-white px-10 my-1 h-[150px]">
-                <a class="img flex justify-center items-center overflow-hidden" href="{% url 'customer:aboutOrder' %}"><img src="https://img.freepik.com/free-photo/abstract-autumn-beauty-multi-colored-leaf-vein-pattern-generated-by-ai_188544-9871.jpg" alt="" class="max-w-[200px] max-sm:w-[100%]"></a>
-                <div class="grid gap-1 items-center">
-                    <a href="{% url 'customer:aboutOrder' %}" class="sm:h-[40px] mx-sm:h-[25px] max-sm:text-[10px] sm:text-[20px] font-semibold overflow-x-hidden">Boat HeadPhone Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro, similique.</a>
-                    <div class="material-symbols-outlined sm:h-[40px] max-sm:text-[15px] sm:text-[20px] flex items-center overflow-hidden">2499 currency_rupee</div>
-                    <div class="status flex items-center gap-5 font-medium">Quentity <input type="number" class="border-black border-[1px] w-6 h-7"></div>
+        <div class="orderDetils sm:flex max-sm:grid ">
+            
+            <!-- -----------for select delivery ditels----------- -->
+            <div class="price_deti_ele delivery_det  overflow-hidden">
+                <div class="deliveryDitels">
+                    <div class="price_deti_ele heding  bg-white text-[20px] font-medium p-[3px] items-center justify-center h-[40px]">
+                        DELIVERY DETAILS
+                    </div>
+                    <!-- .................... option address ...................  -->
+                    <div class=" bg-white text-[240x] grid gap-3 m-2 p-3">
+                        <select name="" id="" class="select_address bg-gray-300 h-[40px] px-3 text-[15px]">
+                            <option value="000" class="opt000">Select Delivery Details</option>
+                            {% for item in userAddres.values %}
+                            <option value="{{item.id}}" class="h-[70px] overflow-x-hidden flex flex-wrap">
+                                {{item.ReciverName}} {{item.ReciverMobileNo}} {{item.Home_Rode_Address}} {{item.pincode}}
+                                {{item.city}} {{item.state}}</option>
+                            {% endfor %}
+                            <option value="0" class="addAddress">Add New Address</option>
+                        </select>
+                        <div class="add_new_address">
+                            <form action="" method="post" class="addAdressForm grid gap-2" style="display: none; ">{%
+                                csrf_token %}
+                                <input name="ReciverName" type="text" placeholder="  Full Name"
+                                    style="border: 1px solid black;border-radius: 25px;height: 28px;padding: 6px;font-size: 18px;width: 80%;margin-left: 10%;margin-right: 10%;">
+                                <input name="ReciverMobileNo" type="text" placeholder="  Phone Number"
+                                    style="border: 1px solid black;border-radius: 25px;height: 28px;padding: 6px;font-size: 18px;width: 80%;margin-left: 10%;margin-right: 10%;">
+                                <input name="pincode" type="text" placeholder="  Pincode"
+                                    style="border: 1px solid black;border-radius: 25px;height: 28px;padding: 6px;font-size: 18px;width: 80%;margin-left: 10%;margin-right: 10%;">
+                                <input name="state" type="text" placeholder="  State"
+                                    style="border: 1px solid black;border-radius: 25px;height: 28px;padding: 6px;font-size: 18px;width: 80%;margin-left: 10%;margin-right: 10%;">
+                                <input name="city" type="text" placeholder="  City"
+                                    style="border: 1px solid black;border-radius: 25px;height: 28px;padding: 6px;font-size: 18px;width: 80%;margin-left: 10%;margin-right: 10%;">
+                                <input name="Home_Rode_Address" type="text"
+                                    placeholder="  Home & Road Name or full Address "
+                                    style="border: 1px solid black;border-radius: 25px;height: 28px;padding: 6px;font-size: 18px;width: 80%;margin-left: 10%;margin-right: 10%;">
+                                <input name="submit" type="submit" value="Add"
+                                    style="border: 1px solid black;border-radius: 25px;height: 28px;width: 20%;margin-left: 70%;margin-top: 3px;margin-bottom: 3px;">
+                            </form>
+    
+                        </div>
+                    </div>
+                </div>
+                <div class="pamentMethord">
+                    <div class="price_deti_ele heding  bg-white text-[20px] font-medium p-[3px] items-center justify-center h-[40px]">
+                        PAMENT METHORD
+                    </div>
+                    <!-- .................... option address ...................  -->
+                    <div class=" bg-white text-[240x] grid gap-3 m-2 p-3">
+                        <div class="deliveryOption caseOnDelivery grid gap-3 grid-cols-2 bg-am">
+                            <input type="checkbox" name="" id=""> <span class="left-1"> Case on Delivery </span>
+                        </div>
+                        <div class="deliveryOption gPay grid gap-3 grid-cols-2">
+                            <input type="checkbox" name="" id=""> <span class="left-1"> Gpay </span>
+                        </div>
+                        <div class="deliveryOption onlineBanking grid gap-3 grid-cols-2">
+                            <input type="checkbox" name="" id=""> <span class="left-1"> Online Banking </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ---------------for prce dtels------------------ -->
+            <div class="cart_price_detiels grid gap-3">
+                <div
+                    class="price_deti_ele heding  bg-white text-[20px] font-medium p-[3px] items-center justify-center">
+                    PRICE DETAILS
+                </div>
+                <div class="total_price_detils  bg-white p-5 grid grid-cols-1 gap-1 text-[15px]">
+                    <div class="grid grid-cols-[1fr,6px,1fr] gap-3">
+                        <!-- <span class="md:text-right font-medium">Product Price ({{cartItems.price.totalItem}} Item)</span> -->
+                        <span class="md:text-right font-medium">Product Price 2 Item</span>
+                        <span>:</span>
+                        <!-- <div class="material-symbols-outlined text-[20px] flex items-center"><span class="totalPrice text-[19px]">{{cartItems.price.productPrice }}</span>currency_rupee</div> -->
+                        <div class="material-symbols-outlined text-[15px] flex items-center"><span
+                                class="totalPrice text-[15px]">1000</span>currency_rupee</div>
+                    </div>
+                    <div class="grid grid-cols-[1fr,6px,1fr] gap-3">
+                        <span class="md:text-right font-medium">Discount</span>
+                        <span>:</span>
+                        <!-- <div class="material-symbols-outlined text-[20px] flex items-center"><span class="discountPrice text-[19px]">{{cartItems.price.discountPrice }}</span>currency_rupee</div> -->
+                        <div class="material-symbols-outlined text-[15px] flex items-center"><span
+                                class="discountPrice text-[15px]">00</span>currency_rupee</div>
+                    </div>
+                    <div class="grid grid-cols-[1fr,6px,1fr] gap-3">
+                        <span class="md:text-right font-medium">Packaging Fee</span>
+                        <span>:</span>
+                        <!-- <div class="material-symbols-outlined text-[20px] flex items-center"><span class="PackagingFee text-[19px]">{{cartItems.price.PackagingFee }}</span>currency_rupee</div> -->
+                        <div class="material-symbols-outlined text-[15px] flex items-center"><span
+                                class="PackagingFee text-[15px]">100</span>currency_rupee</div>
+                    </div>
+                    <div class="grid grid-cols-[1fr,6px,1fr] gap-3">
+                        <span class="md:text-right font-medium">Delivery charge</span>
+                        <span>:</span>
+                        <!-- <div class="material-symbols-outlined text-[20px] flex items-center"><span class="DeliveryCharge text-[19px]">{{cartItems.price.DeliveryCharge }}</span>currency_rupee</div> -->
+                        <div class="material-symbols-outlined text-[15px] flex items-center"><span
+                                class="DeliveryCharge text-[15px]">40</span>currency_rupee</div>
+                    </div>
+                    <div class="grid grid-cols-[1fr,6px,1fr] gap-3">
+                        <span class="md:text-right font-medium"> Total Price</span>
+                        <span>:</span>
+                        <!-- <div class="material-symbols-outlined text-[20px] flex items-center"><span class=" text-[19px]">{{cartItems.price.totalPrice }}</span>currency_rupee</div> -->
+                        <div class="material-symbols-outlined text-[15px] flex items-center"><span
+                                class=" text-[15px]">1140</span>currency_rupee</div>
+                    </div>
                 </div>
             </div>
         </div>
+        <div class="price_deti_ele place_order_div flex justify-center bg-[rgb(238,235,235)]  rounded-[20px]">
+            <button type="submit"
+                class="place_order border-[1px] border-black rounded-[25px] h-[35px] w-[20%] my-3 bg-gray-300">Place
+                order</button>
+        </div>
 
-        
     </div>
+    <script>
+        deliveryOptions = document.querySelectorAll('.deliveryOption')
+        deliveryOptions.forEach(element => {
+            element.addEventListener('click',()=>{
+                console.log('clicked')
+                element.style.backgroundColor = 'rgb(255,251,240)'
+            })
+        });
+    </script>
 </body>
+
 </html>

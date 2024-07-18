@@ -1,4 +1,5 @@
 from django.shortcuts import render,redirect
+from django.urls import reverse
 import json
 import firebase_admin,pyrebase
 from firebase_admin import credentials , firestore
@@ -63,8 +64,8 @@ def logOutCustomer(request):
     print("try to log out")
     request.session.flush()
     return redirect('customer:user_login')
-
 def Cart(request):
+    print("you are into cart .....................")
     c_data = request.session.get('c_data')
     c_Email = c_data['Email']
     
@@ -133,18 +134,43 @@ def Cart(request):
     j=0
     for i in userAddress:
         j+=1
-        print(type(i))
+        # print(type(i))
         # userAddress[j] = i
-        print(f'{i}')
+        # print(f'{i}')
         model_dict = model_to_dict(i)
         # Store the dictionary in userAddres
         userAddres[j] = model_dict
     print('end..................................')
-    print(userAddres)
+    # print(userAddres)
+    # print("\n\n")
+    # print(allCardItemsData)
+    # print("\n\n")
     return render(request , "cart.html",{'cartItems':allCardItemsData ,'userAddres':userAddres})
 
+def place_order(request):
+    return render(request,"place_order.html")
+
 def allOrders(request):
+    c_data = request.session.get('c_data')
+    userCartData = all_product.objects.filter(customer_id = c_data['main_id'])
+    for key,j in enumerate(userCartData):
+        product_data = serializers.serialize('json',[j])
+        print(product_data)
+        product_data = json.loads(product_data)[0]
+        print(product_data)
     return render(request , "allOrders.html")
 
 def aboutOrder(request):
     return render(request,'aboutOrder.html')
+
+def remove_item_from_cart(request):
+    print("\n\n\n")
+    print("you are in to remove_item_from_cart function py")
+    print("remove clicked")
+    dele = request.GET.get("dele")
+    print(dele)
+    delete_item = cart.objects.filter(productId = dele)
+    delete_item.delete()
+    print("item delete complet")
+    print("\n\n\n")
+    return redirect(reverse('customer:cart'))

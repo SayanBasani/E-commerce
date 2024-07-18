@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>ajax</title>
+</head>
+<body class="bg-slate-800 p-6">
+    <button type="submit" class="bg-white">click me </button>
+    <div></div>
+    <Script>
+        btn = document.querySelector('button')
+        btn.addEventListener('click',()=>{
+            console.log('clicked ')
+            ajax = new XMLHttpRequest();
+            ajax.open("GET","cart.html",true);
+            ajax.send();
+            ajax.onload = function(){
+                document.querySelector('div').innerHTML = this.responseText
+            }
+        })
+    </Script>
+</body>
+</html>

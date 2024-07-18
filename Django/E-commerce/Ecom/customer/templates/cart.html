@@ -41,10 +41,10 @@
                 </div>
                 <!-- this for indevisual items and it have iterat -->
                 
-                
                 {% for item in cartItems.values %}
+                {% if item != cartItems.price %}
                     <div class="bg-slate-000">
-                        <div class="details cart_items_details  gap-4 items-center grid grid-cols-2 ">
+                        <div class="details cart_items_details  gap-4 items-center grid grid-cols-2 " value="{{ item.product_id }}">
                             <div class="text text_img h-[250px] w-auto overflow-hidden flex items-center justify-center">
                                 <img src="https://gratisography.com/wp-content/uploads/2024/01/gratisography-cyber-kitty-800x525.jpg" alt="" class="item_img" s1tyle="grid-area: a;">
                                 <!-- <img src="{{ item.ProductImg }}" alt="" class="item_img" s1tyle="grid-area: a;"> -->
@@ -66,11 +66,14 @@
                                         class=" border-black border-[1px] w-16 h-10 mx-3 px-2 rounded-[16px]">
                                 </div>
                                 <div class="quentity_ele flex items-center justify-center">
-                                    <button class="remove bg-[rgb(255,0,0)] px-2 rounded-[16px] h-8">remove</button>
+                                    <!-- <a href=""> -->
+                                        <button value="{{ forloop.counter0 }}" class="remove bg-[rgb(255,0,0)] px-2 rounded-[16px] h-8">remove</button>
+                                    <!-- </a> -->
                                 </div>
                             </div>
                         </div>
                     </div>
+                {% endif %}
                 {% endfor %}
                         <!-- remove and quentity set button -->
 
@@ -110,48 +113,6 @@
                             <div class="material-symbols-outlined text-[20px] flex items-center"><span class=" text-[19px]">{{cartItems.price.totalPrice }}</span>currency_rupee</div>
                         </div>
                     </div>
-        <!-- -----------for select address----------- -->
-                    <!-- <div class="price_deti_ele delivery_det grid gap-2">
-                        <div
-                            class="price_deti_ele heding  bg-white text-[25px] font-medium p-[3px] items-center justify-center">
-                            ADDRESS DETAILS</div>
-                        <div class=" bg-white text-[240x] grid gap-3 m-2 p-3">
-                            <select name="" id="" class="select_address bg-gray-300 h-[40px] px-3 text-[18px]">
-                                <option value="000" class="opt000"></option>
-                                <option value="1">chatra akhrasal bankura 722206</option>
-                                <option value="0" class="addAddress">Add New Address</option>
-                            </select>
-                            <div class="add_new_address">
-                                <form action="" method="post" class="addAdressForm" style="display: none; ">
-                                    <input type="text" placeholder="  Enter your New Address" style="border: 1px solid black;border-radius: 25px;height: 28px;padding: 6px;font-size: 18px;width: 80%;margin-left: 10%;margin-right: 10%;">
-                                    <input type="submit" value="Add" style="border: 1px solid black;border-radius: 25px;height: 28px;width: 20%;margin-left: 70%;margin-top: 3px;margin-bottom: 3px;">
-                                </form>
-    
-                            </div>
-                        </div>
-                    </div> -->
-
-        <!-- -----------for select mobile number----------- -->
-                    <!-- <div class="price_deti_ele delivery_det grid gap-2">
-                        <div
-                            class="price_deti_ele heding  bg-white text-[25px] font-medium p-[3px] items-center justify-center">
-                            CONTACT DETAILS</div>
-                        <div class=" bg-white text-[240x] grid gap-3 m-2 p-3">
-                            <select name="" id="" class="select_mobileNo bg-gray-300 h-[40px] px-3 text-[18px]">
-                                <option value="000" class="opt000"></option>
-                                <option value="1">000000000</option>
-                                <option value="0" class="addContactNumber">Add New Contact Number</option>
-                            </select>
-                            <div class="add_new_Contact Number">
-                                <form action="" method="post" class="addContactNumberForm" style="display: none; ">
-                                    <input type="text" placeholder="  Enter your New Contact Number" style="border: 1px solid black;border-radius: 25px;height: 28px;padding: 6px;font-size: 18px;width: 80%;margin-left: 10%;margin-right: 10%;">
-                                    <input type="submit" value="Add" style="border: 1px solid black;border-radius: 25px;height: 28px;width: 20%;margin-left: 70%;margin-top: 3px;margin-bottom: 3px;">
-                                </form>
-    
-                            </div>
-                        </div>
-                    </div> -->
-
         <!-- -----------for select delivery ditels----------- -->
                     <div class="price_deti_ele delivery_det grid gap-2">
                         <div
@@ -183,14 +144,17 @@
 
                     <div
                         class="price_deti_ele place_order_div flex justify-center bg-[rgb(238,235,235)]  rounded-[20px]">
-                        <button type="submit"
-                            class="place_order border-[1px] border-black rounded-[25px] h-[35px] w-[20%] my-3 bg-gray-300">Place
-                            order</button>
+                        <a href="{% url 'customer:place_order' %}">
+                            <button type="submit" class="place_order border-[1px] border-black rounded-[25px] h-[35px] w-[200%] my-3 bg-gray-300">
+                                Place order
+                            </button>
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <div class="try border-[2px] border-black w-60 h-40"></div>
     <script>
         select_address = document.querySelector('.select_address')
         addAdressForm = document.querySelector('.addAdressForm')
@@ -214,36 +178,37 @@
             }
 
         })
-        // add address function end
-
-        // add Contact Number function start 
-        select_mobileNo.addEventListener('change', () => {
-            selectedValue = select_mobileNo.value
-            console.log("value is : " + selectedValue)
-            document.querySelector('.opt000').style.display = 'none';            // 000 option hide
-            if (selectedValue == '0') {
-                addContactNumberForm.style.display = 'grid'
-            } else {
-                addContactNumberForm.style.display = 'None'
-            }
-
-        })
-        // add Contact Number function end
+       
 
 
         // remove from cart function start
         cart_items_detail = document.querySelectorAll('.cart_items_details')
+        console.log(cart_items_detail)
         cart_items_detail.forEach(element => {
-            // console.log("list")
             removeBtn = element.querySelector('.remove')
-            // console.log(rem)
+            console.log(removeBtn.value)
             removeBtn.addEventListener('click', () => {
                 element.style.display = 'None'
+                // console.log(element)
+                // console.log(element.getAttribute('value'))
+                val = element.getAttribute('value')
+                ajaxx(val);
             });
         });
         console.log('working script end')
-        // remove from cart function end
+        
+        // remove from cart function end{% url 'customer:remove_item_from_cart'%}+?del={{item.product_id}}
+        function ajaxx(val){
+            console.log('you are in to ajax function ')
+            url ="{% url 'customer:remove_item_from_cart'%}?dele=";
+            url = url.concat(val)
+            console.log(url)
+            ajax = new XMLHttpRequest();
+            ajax.open("GET",url,true);
+            ajax.send();
+        }
     </script>
+
 </body>
 
 </html>
