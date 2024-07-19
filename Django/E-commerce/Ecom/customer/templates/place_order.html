@@ -18,7 +18,7 @@
 </head>
 
 <body class="bg-[rgb(238,235,235)]">
-    <div class="body grid gap-3 m-4 justify-center items-center place_order_page">
+    <div class="body grid gap-3 m-4 justify-center items-center place_order_pagee">
         <div
             class="price_deti_ele heding  bg-white text-[25px] font-medium p-[3px] items-center text-center justify-center">
             CHECKOUT
@@ -33,8 +33,8 @@
                     </div>
                     <!-- .................... option address ...................  -->
                     <div class=" bg-white text-[240x] grid gap-3 m-2 p-3">
-                        <div class="selectedAddress">{{cartPrice.userAddres.ReciverName}} {{cartPrice.userAddres.ReciverMobileNo}} {{cartPrice.userAddres.Home_Rode_Address}} {{cartPrice.userAddres.pincode}} {{cartPrice.userAddres.city}} {{cartPrice.userAddres.state}}</div>
-
+                        <div class="selectedAddress addAddressid" value="{{cartPrice.userAddres.id}}">{{cartPrice.userAddres.ReciverName}} {{cartPrice.userAddres.ReciverMobileNo}} {{cartPrice.userAddres.Home_Rode_Address}} {{cartPrice.userAddres.pincode}} {{cartPrice.userAddres.city}} {{cartPrice.userAddres.state}}</div>
+<div>selectedAddress addAddressid</div>
                     </div>
                 </div>
                 <div class="pamentMethord">
@@ -91,39 +91,17 @@
             </div>
         </div>
         <div class="price_deti_ele place_order_div flex justify-center bg-[rgb(238,235,235)]  rounded-[20px]">
-            <a href="{% url 'customer:order_place_sucessfull'%}" class="place_order_a">
+            <a  class="place_order_b">
+                <!-- href="{% url 'customer:order_place_sucessfull'%}" -->
                 <button type="submit" class="place_order border-[1px] border-black rounded-[25px] h-[35px] w-[200%] my-3 bg-gray-300">
                     Place order
                 </button>
             </a>
         </div>
-
     </div>
+    <div class="place_the_new_succes_templet"></div>
     <script>
-        deliveryOptions = document.querySelectorAll('.deliveryOption')
-        deliveryOptions.forEach(element => {
-            element.addEventListener('click',()=>{
-                console.log('clicked')
-                element.style.backgroundColor = 'rgb(255,251,240)'
-            })
-        });
-        // post request for make sucessfull
-        place_order_a = document.querySelector('.place_order_a')
-        place_order_page = document.querySelector('.place_order_page')
-        place_order_a.addEventListener('click',()=>{
-            const customerAddress = JSON.stringify({{ cartPrice.userAddres|safe }});
-            ajax = new XMLHttpRequest();
-            ajax.open('POST',"{% url 'customer:order_place_sucessfull' %}",true);
-            ajax.setRequestHeader("Content-Type","application/json");
-            ajax.setRequestHeader("X-CSRFToken","{{ csrf_token }}");
-            
-            ajax.onload = function (){
-                place_order_page.innerHTML = ajax.responceText;
-            }
-            ajax.send(JSON.stringify({
-                customerAddress : customerAddress
-            }));
-        })
+        
     </script>
 <!-- {{cartPrice}} -->
 </body>

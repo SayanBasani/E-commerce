@@ -22,7 +22,7 @@ class shoppingAddres(models.Model):
         return f'{self.customerId},{self.ReciverName},{self.ReciverMobileNo},{self.state},{self.city},{self.pincode},{self.Home_Rode_Address}'
 class orders(models.Model):
     customer_id =           models.CharField(max_length=20)
-    cust_address =          models.CharField(max_length=1000)
+    customer_address =      models.CharField(max_length=1000)
     productId =             models.CharField(max_length=20)
     quentity =              models.CharField(max_length=10)
     Time      =             models.CharField(max_length=30)
@@ -32,3 +32,5 @@ class orders(models.Model):
     city =                  models.CharField(max_length=50,null=False)
     pincode =               models.CharField(max_length=10,null=False)
     Home_Rode_Address =     models.CharField(max_length=150,null=False)
+    def __str__(self):
+        return f'{self.customer_id},{self.customer_address},{self.productId},{self.quentity},{self.Time},{self.ReciverName},{self.ReciverMobileNo},{self.state},{self.city},{self.pincode},{self.Home_Rode_Address}'

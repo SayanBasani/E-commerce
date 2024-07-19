@@ -184,24 +184,24 @@
        
         // remove from cart function start
         cart_items_detail = document.querySelectorAll('.cart_items_details')
-        console.log(cart_items_detail)
+        // console.log(cart_items_detail)
         cart_items_detail.forEach(element => {
             removeBtn = element.querySelector('.remove')
-            console.log(removeBtn.value)
+            // console.log(removeBtn.value)
             removeBtn.addEventListener('click', () => {
                 element.style.display = 'None'
                 val = element.getAttribute('value')
                 ajaxx(val);
             });
         });
-        console.log('working script end')
+        // console.log('working script end')
         
         // remove from cart function end
         function ajaxx(val){
-            console.log('you are in to ajax function ')
+            // console.log('you are in to ajax function ')
             url ="{% url 'customer:remove_item_from_cart'%}?dele=";
             url = url.concat(val)
-            console.log(url)
+            // console.log(url)
             ajax = new XMLHttpRequest();
             ajax.open("GET",url,true);
             ajax.send();
@@ -217,7 +217,7 @@
             valAddress = select_address.value ;
             event.preventDefault(); 
             if (valAddress != '0' && valAddress != '000'){
-                console.log("Select a valid address.");
+                // console.log("Select a valid address.");
                 full_cart_page.style.display="none";
 
                 const cartPrice = JSON.stringify({{ cartItems.price|safe }});
@@ -229,6 +229,7 @@
                 // ajax.open("GET","{% url 'customer:place_order' %}?userAddres={{userAddres.price}}",true);
                 ajax.onload = function (){
                     place_order_page.innerHTML=ajax.responseText;
+                    afterlodee();
                 }
                 ajax.send(JSON.stringify({
                     valAddress: valAddress,
@@ -244,6 +245,50 @@
         });
 
     </script>
+    <!-- place order script -->
+   <script>
+    function afterlodee(){
+        console.log("you are in to afterlodee function")
+        // cartPricee = {{cartPrice}}
+        // console.log(cartPrice)
+        // customerAddress = {{ cartPrice.userAddres|safe }};
+        // console.log({{ cartPrice.userAddres|safe }})
+        addAddressdiv = document.querySelector('.addAddressid')
+        addAddressid = addAddressdiv.getAttribute('value')
+        console.log("you are in")
+        // post request for make sucessfull
+        place_order_b = document.querySelector('.place_order_b')
+        place_order_pagee = document.querySelector('.place_order_pagee')
+        place_the_new_succes_templet = document.querySelector('.place_the_new_succes_templet')
+        place_order_b.addEventListener('click',function(event){
+            // place_order_b.preventDefault();
+            // customerAddress = JSON.stringify({{ cartPrice.userAddres|safe }});
+            // console.log(customerAddress)
+            
+            ajax = new XMLHttpRequest();
+            // ajax.open('POST',"{% url 'customer:order_place_sucessfull' %}",true);
+            url = "{% url 'customer:order_place_sucessfull' %}?addAddressid="+addAddressid
+            // url.concat(addAddressid)
+            ajax.open('GET',url,true);
+            // ajax.setRequestHeader("Content-Type","application/json");
+            // ajax.setRequestHeader("X-CSRFToken","{{ csrf_token }}");
+            
+            ajax.onload = function (){
+                console.log(ajax.status)
+                if (ajax.status === 200){
+                    place_order_pagee.style.display = 'none';
+                    place_the_new_succes_templet.innerHTML = ajax.response;
+                }else{
+                    console.error('there is errort')
+                }
+            }
+            ajax.send()
+            // ajax.send(JSON.stringify({
+            //     customerAddress : customerAddress
+            // }));
+        })
+    }
+   </script>
 </body>
 
 </html>

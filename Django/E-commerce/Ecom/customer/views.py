@@ -4,11 +4,12 @@ import json
 import firebase_admin,pyrebase
 from firebase_admin import credentials , firestore
 from firebase_admin import credentials, initialize_app, storage
-from customer.models import user_singup,shoppingAddres
+from customer.models import user_singup,shoppingAddres,orders
 from HomePage.models import cart
 from Seller.models import all_product
 from django.core import serializers
 from django.forms.models import model_to_dict
+import datetime
 
 field_names = [field.name for field in user_singup._meta.get_fields()]
 # ####### singup
@@ -272,20 +273,53 @@ def place_order(request):
     return render(request,"place_order.html",{'cartPrice':cartPrice})
 def order_place_sucessfull(request):
     print('you are into order_place_sucessfull order................................... ??')
-    place_order_data = json.loads(request.body)
-    print(place_order_data)
-    print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@2")
-    c_data = request.session.get("c_data")
-    print(c_data)
+    if request.method == 'GET':
+        print('Methode is POST')
+        try:
+            addAddressid = request.GET.get('addAddressid')
+            c_data = request.session.get("c_data")
+            print(c_data)
+            
+            userAddress = shoppingAddres.objects.filter(customerId = c_data['main_id'] , id = addAddressid)
+            fulladdress = userAddress[0]
+            userAddres = {}
+            j=0
+            for i in userAddress:
+                j+=1
+                model_dict = model_to_dict(i)
+                userAddres[j] = model_dict
+            userAddres = userAddres[1]
+            print("userAddres checking")
+            print(userAddres)
+            print(type(userAddres))
+            customer_id =               c_data['main_id']
+            customer_address =          fulladdress
+            productId = ''
+            quentity = ''
+            Time =                      str(datetime.datetime.now())
+            ReciverName =               userAddres['ReciverName']
+            ReciverMobileNo =           userAddres['ReciverMobileNo']
+            state =                     userAddres['state']
+            city =                      userAddres['city']
+            pincode =                   userAddres['pincode']
+            Home_Rode_Address =         userAddres['Home_Rode_Address']
+            # finding the cart datas 
+            userCartData = cart.objects.filter(customer_id = c_data['main_id'])
+            allCardItems = {}
+            for i,j in enumerate(userCartData):
+                data = serializers.serialize('json',[j])
+                dect_data = json.loads(data)[0]
+                allCardItems[i]=(dect_data['fields'])
+            print(allCardItems)
+            for i in allCardItems:
+                i_data = allCardItems[i]
+                print(i_data)
+                print("\n\n")
+                collected_order_data = orders(customer_id = customer_id,customer_address = customer_address, productId = i_data['productId'] ,quentity = i_data['quentity'] , Time = Time,ReciverName = ReciverName,ReciverMobileNo = ReciverMobileNo,state = state,city = city,pincode = pincode,Home_Rode_Address = Home_Rode_Address  )
 
-    # finding the cart datas 
-    userCartData = cart.objects.filter(customer_id = c_data['main_id'])
-    allCardItems = {}
-    for i,j in enumerate(userCartData):
-        data = serializers.serialize('json',[j])
-        dect_data = json.loads(data)[0]
-        allCardItems[i]=(dect_data['fields'])
-    print(allCardItems)
-    # {0: {'customer_id': 'SynBsn0362sc', 'productId': 'Pda207-1017137762', 'quentity': '1', 'Time': '2024-07-19 08:42:01.999797'}, 1: {'customer_id': 'SynBsn0362sc', 'productId': 'Pda207-1017378710', 'quentity': '1', 'Time': '2024-07-19 08:42:07.917897'}}
-    
-    return render(request,'order_place_sucessfull.html')
+            # {0: {'customer_id': 'SynBsn0362sc', 'productId': 'Pda207-1017137762', 'quentity': '1', 'Time': '2024-07-19 08:42:01.999797'}, 1: {'customer_id': 'SynBsn0362sc', 'productId': 'Pda207-1017378710', 'quentity': '1', 'Time': '2024-07-19 08:42:07.917897'}}
+            return render(request,'order_place_sucessfull.html')
+        except:
+            return HttpResponse("there is error")
+    else:
+        return HttpResponse('invalid request')
