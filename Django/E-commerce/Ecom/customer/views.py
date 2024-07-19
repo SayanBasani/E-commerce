@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,HttpResponse
 from django.urls import reverse
 import json
 import firebase_admin,pyrebase
@@ -64,7 +64,7 @@ def logOutCustomer(request):
     print("try to log out")
     request.session.flush()
     return redirect('customer:user_login')
-def Cart(request):
+def Car(request): # copy
     print("you are into cart .....................")
     c_data = request.session.get('c_data')
     c_Email = c_data['Email']
@@ -146,9 +146,94 @@ def Cart(request):
     # print(allCardItemsData)
     # print("\n\n")
     return render(request , "cart.html",{'cartItems':allCardItemsData ,'userAddres':userAddres})
+def Cart(request):
+    print("you are into cart .....................")
+    c_data = request.session.get('c_data')
+    c_Email = c_data['Email']
+    try:
+        userCartData = cart.objects.filter(customer_id = c_data['main_id'])
+        print(userCartData)
+        allCardItems = {}
+        for i,j in enumerate(userCartData):
+            data = serializers.serialize('json',[j])
+            dect_data = json.loads(data)[0]
+            allCardItems[i]=(dect_data['fields'])
+        cartDataLen = len(userCartData)
+        totalPrice = 0
+        allCardItemsData = {}
+        for i in allCardItems:
+            cart_product_id = allCardItems[i]['productId']
+            # print(cart_product_id)
+            product_data = ''
+            product_gr = all_product.objects.filter(product_id = cart_product_id)
+            for key,j in enumerate(product_gr):
+                product_data = serializers.serialize('json',[j])
+                product_data = json.loads(product_data)[0]
+            # print(product_data)
+            # print("\n\n")
+            totalPrice = totalPrice + int(product_data['fields']['price'])
+            allCardItemsData[i] = (product_data['fields'])
+            prices = {
+                'customerId':c_data['main_id'],
+                'totalItem': i+1,
+                'productPrice' : totalPrice,  
+                'discountPrice' : '00',
+                'PackagingFee' : '40',
+                'DeliveryCharge' : '100',
+            }
+            totalPrice = int(prices['productPrice']) + int(prices['PackagingFee']) + int(prices['discountPrice']) + int(prices['DeliveryCharge'])
+            prices.update({'totalPrice':totalPrice})
+        allCardItemsData['price'] = prices
+        newAddress = {}
+        try: # try to uplode new address 
+            print('try to add a new address')
+            ReciverName = request.POST.get('ReciverName')
+            ReciverMobileNo = request.POST.get('ReciverMobileNo')
+            state = request.POST.get('state')
+            city = request.POST.get('city')
+            pincode = request.POST.get('pincode')
+            Home_Rode_Address = request.POST.get('Home_Rode_Address')
+            newAddress = {
+                'customerId':c_data['main_id'],
+                'ReciverName':ReciverName,
+                'ReciverMobileNo':ReciverMobileNo,
+                'state':state,
+                'city':city,
+                'pincode':pincode,
+                'Home_Rode_Address':Home_Rode_Address,
+            }
+            print(newAddress)
+            for k in newAddress:
+                print(f'{newAddress[k]} --->  {len(newAddress[k])}')
+            # newShoppingAddres = addShoppingAddres.objects.create(**newAddress)
+            newShoppingAddres = shoppingAddres(**newAddress)
+            newShoppingAddres.save()
+        except:
+            print('No try about add address')
+        userAddress = shoppingAddres.objects.filter(customerId = c_data['main_id'])
+        userAddres = {}
+        j=0
+        for i in userAddress:
+            j+=1
+            model_dict = model_to_dict(i)
+            # Store the dictionary in userAddres
+            userAddres[j] = model_dict
+        print('end..................................')
+    except:
+        return HttpResponse("go and add something into cart")
+    return render(request , "cart.html",{'cartItems':allCardItemsData ,'userAddres':userAddres})
 
-def place_order(request):
-    return render(request,"place_order.html")
+def remove_item_from_cart(request):
+    print("\n\n\n")
+    print("you are in to remove_item_from_cart function py")
+    print("remove clicked")
+    dele = request.GET.get("dele")
+    print(dele)
+    delete_item = cart.objects.filter(productId = dele)
+    delete_item.delete()
+    print("item delete complet")
+    print("\n\n\n")
+    return redirect(reverse('customer:cart'))
 
 def allOrders(request):
     c_data = request.session.get('c_data')
@@ -163,14 +248,44 @@ def allOrders(request):
 def aboutOrder(request):
     return render(request,'aboutOrder.html')
 
-def remove_item_from_cart(request):
-    print("\n\n\n")
-    print("you are in to remove_item_from_cart function py")
-    print("remove clicked")
-    dele = request.GET.get("dele")
-    print(dele)
-    delete_item = cart.objects.filter(productId = dele)
-    delete_item.delete()
-    print("item delete complet")
-    print("\n\n\n")
-    return redirect(reverse('customer:cart'))
+
+def place_order(request):
+    print('you are into place order................................... ??')
+    c_data = request.session.get("c_data")
+    print(c_data)
+    checkout_data = json.loads(request.body)
+    print(checkout_data)
+    valAddress = json.loads(checkout_data["valAddress"])
+    # cartItems = checkout_data["cartItems"]
+    cartPrice =json.loads(checkout_data["cartPrice"])
+    userAddress = shoppingAddres.objects.filter(customerId = c_data['main_id'])
+    userAddres = ''
+    j=0
+    for i in userAddress: #finding the address which selected by the user into cart page 
+        j+=1
+        model_dict = model_to_dict(i)
+        if model_dict['id'] == valAddress :
+            userAddres = model_dict
+    cartPrice.update({'userAddres':userAddres})
+    
+    print('you are into place order................................... ??')
+    return render(request,"place_order.html",{'cartPrice':cartPrice})
+def order_place_sucessfull(request):
+    print('you are into order_place_sucessfull order................................... ??')
+    place_order_data = json.loads(request.body)
+    print(place_order_data)
+    print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@2")
+    c_data = request.session.get("c_data")
+    print(c_data)
+
+    # finding the cart datas 
+    userCartData = cart.objects.filter(customer_id = c_data['main_id'])
+    allCardItems = {}
+    for i,j in enumerate(userCartData):
+        data = serializers.serialize('json',[j])
+        dect_data = json.loads(data)[0]
+        allCardItems[i]=(dect_data['fields'])
+    print(allCardItems)
+    # {0: {'customer_id': 'SynBsn0362sc', 'productId': 'Pda207-1017137762', 'quentity': '1', 'Time': '2024-07-19 08:42:01.999797'}, 1: {'customer_id': 'SynBsn0362sc', 'productId': 'Pda207-1017378710', 'quentity': '1', 'Time': '2024-07-19 08:42:07.917897'}}
+    
+    return render(request,'order_place_sucessfull.html')

@@ -20,7 +20,7 @@
 </head>
 
 <body class="bg-[rgb(238,235,235)]">
-    <div class="cartBodyborder-[2px] h-100px  bg-[rgb(238,235,235)] m-5 grid gap-3 a">
+    <div class="cartBodyborder-[2px] h-100px  bg-[rgb(238,235,235)] m-5 grid gap-3 a full_cart_page">
         <!-- <div class="cartBodyborder-[2px] h-100px sm:flex max-sm:grid bg-[rgb(238,235,235)] m-5 gap-5 a"> -->
         <div class="cart_nav bg-white text-[25px] font-medium p-[15px] items-center justify-center">
             <a href="{% url 'homepage:HomePage'%}" class="back flex gap-3 overflow-hidden items-center ">
@@ -83,9 +83,9 @@
             <!-- price cart  -->
             <div class="">
                 <div class="cart_price_detiels grid gap-3">
-                    <div
-                        class="price_deti_ele heding  bg-white text-[25px] font-medium p-[3px] items-center justify-center">
-                        PRICE DETAILS</div>
+                    <div class="price_deti_ele heding  bg-white text-[25px] font-medium p-[3px] items-center justify-center">
+                        PRICE DETAILS
+                    </div>
                     <div class="total_price_detils  bg-white p-5 grid grid-cols-1 gap-2 text-[20px]">
                         <div class="grid grid-cols-[1fr,6px,1fr] gap-3">
                             <span class="md:text-right font-medium">Product Price ({{cartItems.price.totalItem}} Item)</span>
@@ -123,7 +123,7 @@
                             <select name="" id="" class="select_address bg-gray-300 h-[40px] px-3 text-[18px]">
                                 <option value="000" class="opt000">Select Delivery Details</option>
                                 {% for item in userAddres.values %}
-                                        <option value="{{item.id}}"> {{item.ReciverName}} {{item.ReciverMobileNo}} {{item.Home_Rode_Address}} {{item.pincode}} {{item.city}} {{item.state}}</option>
+                                        <option class="selective" value="{{item.id}}"> {{item.ReciverName}} {{item.ReciverMobileNo}} {{item.Home_Rode_Address}} {{item.pincode}} {{item.city}} {{item.state}}</option>
                                 {% endfor %}
                                 <option value="0" class="addAddress">Add New Address</option>
                             </select>
@@ -144,7 +144,7 @@
 
                     <div
                         class="price_deti_ele place_order_div flex justify-center bg-[rgb(238,235,235)]  rounded-[20px]">
-                        <a href="{% url 'customer:place_order' %}">
+                        <a href="{% url 'customer:place_order' %}?cartItems={{cartItems}}" class="place_order_a">
                             <button type="submit" class="place_order border-[1px] border-black rounded-[25px] h-[35px] w-[200%] my-3 bg-gray-300">
                                 Place order
                             </button>
@@ -154,13 +154,13 @@
             </div>
         </div>
     </div>
-    <div class="try border-[2px] border-black w-60 h-40"></div>
+    <div class="place_order_page"></div>
     <script>
         select_address = document.querySelector('.select_address')
         addAdressForm = document.querySelector('.addAdressForm')
         addAddress = document.querySelector('.addAddress')
         addContactNumberForm = document.querySelector('.addContactNumberForm')
-        select_mobileNo = document.querySelector('.select_mobileNo')
+        select_mobileNo = document.querySelector('.select_mobileNoF')
         
 
         // add address function start 
@@ -169,18 +169,19 @@
         })
         select_address.addEventListener('change', () => {
             selectedValue = select_address.value
-            console.log("value is : " + selectedValue)
+            // console.log("value is : " + selectedValue)
             document.querySelector('.opt000').style.display = 'none';            // 000 option hide
             if (selectedValue == '0') {
                 addAdressForm.style.display = 'grid'
-            } else {
+                placeOrderButton.style.backgroundColor = "white"
+                placeOrderButton.innerHTML = "select a vaild addredd"
+            }
+            else {
                 addAdressForm.style.display = 'None'
             }
 
         })
        
-
-
         // remove from cart function start
         cart_items_detail = document.querySelectorAll('.cart_items_details')
         console.log(cart_items_detail)
@@ -189,15 +190,13 @@
             console.log(removeBtn.value)
             removeBtn.addEventListener('click', () => {
                 element.style.display = 'None'
-                // console.log(element)
-                // console.log(element.getAttribute('value'))
                 val = element.getAttribute('value')
                 ajaxx(val);
             });
         });
         console.log('working script end')
         
-        // remove from cart function end{% url 'customer:remove_item_from_cart'%}+?del={{item.product_id}}
+        // remove from cart function end
         function ajaxx(val){
             console.log('you are in to ajax function ')
             url ="{% url 'customer:remove_item_from_cart'%}?dele=";
@@ -207,8 +206,44 @@
             ajax.open("GET",url,true);
             ajax.send();
         }
-    </script>
+        // userAddres = {{userAddres}}
+        // console.log(userAddres)
+        const placeOrderAnchor = document.querySelector('.place_order_a');
+        const placeOrderButton = document.querySelector('.place_order');
+        const full_cart_page = document.querySelector('.full_cart_page');
+        const place_order_page = document.querySelector('.place_order_page');
 
+        placeOrderAnchor.addEventListener('click', function(event) {
+            valAddress = select_address.value ;
+            event.preventDefault(); 
+            if (valAddress != '0' && valAddress != '000'){
+                console.log("Select a valid address.");
+                full_cart_page.style.display="none";
+
+                const cartPrice = JSON.stringify({{ cartItems.price|safe }});
+
+                ajax = new XMLHttpRequest();
+                ajax.open("POST","{% url 'customer:place_order' %}",true);
+                ajax.setRequestHeader("Content-Type", "application/json");
+                ajax.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+                // ajax.open("GET","{% url 'customer:place_order' %}?userAddres={{userAddres.price}}",true);
+                ajax.onload = function (){
+                    place_order_page.innerHTML=ajax.responseText;
+                }
+                ajax.send(JSON.stringify({
+                    valAddress: valAddress,
+                    // cartItems: cartItems,
+                    cartPrice: cartPrice
+                }));
+            }
+            else{
+                alert("Select a valid address");
+                console.log("bad choose");
+                // event.preventDefault(); 
+            }
+        });
+
+    </script>
 </body>
 
 </html>
